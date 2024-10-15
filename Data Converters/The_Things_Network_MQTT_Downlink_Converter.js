@@ -8,7 +8,8 @@ function hexToBase64(hexString) {
     return btoa(binaryString);
 }
 var flg = "shared_value" in metadata
-var value2 = parseInt(metadata.ss_timevalue).toString(16)if (value2.length==1){
+var value2 = parseInt(metadata.ss_timevalue).toString(16)
+if (value2.length==1){
     value2 = "00000"+parseInt(metadata.ss_timevalue).toString(16)
 }
 else if (value2.length==2){
