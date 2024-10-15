@@ -1,3 +1,4 @@
+////Version: 0.1
 var data = decodeToJson(payload);
 var deviceName = data.end_device_ids.device_id;
 var deviceType = data.end_device_ids.application_ids.application_id;
