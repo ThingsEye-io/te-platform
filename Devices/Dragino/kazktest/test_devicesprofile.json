@@ -1,0 +1,27 @@
+{
+    "id": {
+            "id": "",
+            "entityType": "DEVICE_PROFILE"
+            },
+    "name":"",
+     "type": "DEFAULT",
+    "defaultRuleChainId":{"entityType": "RULE_CHAIN",
+                          "id": ""},
+     "image": null,
+     "defaultQueueName":null,
+     "transportType": "DEFAULT",
+     "provisionType": "DISABLED",
+     "description": "",
+     "profileData": {
+       "configuration": {
+         "type": "DEFAULT"
+       },
+       "transportConfiguration": {
+         "type": "DEFAULT"
+       },
+       "alarms": null,
+       "provisionConfiguration": {
+         "type": "DISABLED"
+       }
+     }
+   } 
