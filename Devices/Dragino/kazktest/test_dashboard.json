@@ -6,6 +6,7 @@
     "assignedCustomers": null,
     "mobileHide": false,
     "mobileOrder": null,
+    "createdTime" :1730097606386,
     "configuration": {
       "description": "All Dragino Sensors share to public",
       "widgets": {
