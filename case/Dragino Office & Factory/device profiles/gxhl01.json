@@ -1,0 +1,2270 @@
+{
+  "name": "gxhl01",
+  "description": "Default device profile",
+  "image": null,
+  "type": "DEFAULT",
+  "transportType": "DEFAULT",
+  "provisionType": "DISABLED",
+  "defaultRuleChainId": {
+    "entityType": "RULE_CHAIN",
+    "id": "d6de9850-6bf0-11ef-a329-6fb88c149adb"
+  },
+  "defaultDashboardId": null,
+  "defaultQueueName": null,
+  "provisionDeviceKey": null,
+  "firmwareId": null,
+  "softwareId": null,
+  "defaultEdgeRuleChainId": null,
+  "default": false,
+  "profileData": {
+    "configuration": {
+      "type": "DEFAULT"
+    },
+    "transportConfiguration": {
+      "type": "DEFAULT"
+    },
+    "provisionConfiguration": {
+      "type": "DISABLED",
+      "provisionDeviceSecret": null
+    },
+    "alarms": [
+      {
+        "id": "2fd0f21b-4797-316f-9850-0a51e2975812",
+        "alarmType": "High Temperature",
+        "createRules": {
+          "CRITICAL": {
+            "condition": {
+              "condition": [
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Temperature_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": false,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Temperature_alarm_switch",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "TempC_SHT"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "GREATER",
+                    "value": {
+                      "defaultValue": 40,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "High_temperature_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "High_temperature_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "High_temperature_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "High_humidity_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "High_humidity_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_humidity_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_humidity_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_temperature_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_temperature_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_voltage_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_voltage_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Humidity_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": false,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Humidity_alarm_switch",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Voltage_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": false,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Voltage_alarm_switch",
+                        "inherit": false
+                      }
+                    }
+                  }
+                }
+              ],
+              "spec": {
+                "type": "SIMPLE"
+              }
+            },
+            "schedule": {
+              "type": "SPECIFIC_TIME",
+              "timezone": "Europe/Kiev",
+              "daysOfWeek": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "startsOn": 30540000,
+              "endsOn": 73800000,
+              "dynamicValue": null
+            },
+            "alarmDetails": "{\"Low_temperature_alarm\":${Low_temperature_alarm},\"High_temperature_alarm\":${High_temperature_alarm},\"Low_humidity_alarm\":${Low_humidity_alarm},\"High_humidity_alarm\":${High_humidity_alarm},\"Low_voltage_alarm\":${Low_voltage_alarm},\"TempC_SHT\":${TempC_SHT},\"Temperature_alarm_switch\":${Temperature_alarm_switch},\"Humidity_alarm_switch\":${Humidity_alarm_switch},\"Voltage_alarm_switch\":${Voltage_alarm_switch}}",
+            "dashboardId": null
+          }
+        },
+        "clearRule": {
+          "condition": {
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "TempC_SHT"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "LESS_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "High_temperature_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "High_temperature_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "High_temperature_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "High_humidity_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "High_humidity_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Humidity_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Humidity_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_humidity_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_humidity_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_temperature_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_temperature_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_voltage_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_voltage_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Temperature_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Temperature_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Voltage_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Voltage_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              }
+            ],
+            "spec": {
+              "type": "SIMPLE"
+            }
+          },
+          "schedule": null,
+          "alarmDetails": "{\"Low_temperature_alarm\":${Low_temperature_alarm},\"High_temperature_alarm\":${High_temperature_alarm},\"Low_humidity_alarm\":${Low_humidity_alarm},\"High_humidity_alarm\":${High_humidity_alarm},\"Low_voltage_alarm\":${Low_voltage_alarm},\"TempC_SHT\":${TempC_SHT},\"Temperature_alarm_switch\":${Temperature_alarm_switch},\"Humidity_alarm_switch\":${Humidity_alarm_switch},\"Voltage_alarm_switch\":${Voltage_alarm_switch}}",
+          "dashboardId": null
+        },
+        "propagate": false,
+        "propagateToOwner": false,
+        "propagateToOwnerHierarchy": false,
+        "propagateToTenant": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "ef211664-3bdc-e970-4fe3-ba8ac80bf2b3",
+        "alarmType": "Low Temperature",
+        "createRules": {
+          "CRITICAL": {
+            "condition": {
+              "condition": [
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Temperature_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": true,
+                      "userValue": null,
+                      "dynamicValue": null
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "TempC_SHT"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "LESS",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_temperature_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_temperature_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_temperature_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "High_humidity_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "High_humidity_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "High_temperature_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "High_temperature_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Humidity_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": false,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Humidity_alarm_switch",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_humidity_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_humidity_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_voltage_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_voltage_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Voltage_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": false,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Voltage_alarm_switch",
+                        "inherit": false
+                      }
+                    }
+                  }
+                }
+              ],
+              "spec": {
+                "type": "SIMPLE"
+              }
+            },
+            "schedule": null,
+            "alarmDetails": "{\"Low_temperature_alarm\":${Low_temperature_alarm},\"High_temperature_alarm\":${High_temperature_alarm},\"Low_humidity_alarm\":${Low_humidity_alarm},\"High_humidity_alarm\":${High_humidity_alarm},\"Low_voltage_alarm\":${Low_voltage_alarm},\"TempC_SHT\":${TempC_SHT},\"Temperature_alarm_switch\":${Temperature_alarm_switch},\"Humidity_alarm_switch\":${Humidity_alarm_switch},\"Voltage_alarm_switch\":${Voltage_alarm_switch}}",
+            "dashboardId": null
+          }
+        },
+        "clearRule": {
+          "condition": {
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "TempC_SHT"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "GREATER_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_temperature_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "High_humidity_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "High_humidity_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "High_temperature_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "High_temperature_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Humidity_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Humidity_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_humidity_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_humidity_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_temperature_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_temperature_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_voltage_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_voltage_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Temperature_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Temperature_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Voltage_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Voltage_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              }
+            ],
+            "spec": {
+              "type": "SIMPLE"
+            }
+          },
+          "schedule": null,
+          "alarmDetails": "{\"Low_temperature_alarm\":${Low_temperature_alarm},\"High_temperature_alarm\":${High_temperature_alarm},\"Low_humidity_alarm\":${Low_humidity_alarm},\"High_humidity_alarm\":${High_humidity_alarm},\"Low_voltage_alarm\":${Low_voltage_alarm},\"TempC_SHT\":${TempC_SHT},\"Temperature_alarm_switch\":${Temperature_alarm_switch},\"Humidity_alarm_switch\":${Humidity_alarm_switch},\"Voltage_alarm_switch\":${Voltage_alarm_switch}}",
+          "dashboardId": null
+        },
+        "propagate": false,
+        "propagateToOwner": false,
+        "propagateToOwnerHierarchy": false,
+        "propagateToTenant": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "f7c02cfd-99c4-9a04-215b-53514702ddad",
+        "alarmType": "High humidity",
+        "createRules": {
+          "MAJOR": {
+            "condition": {
+              "condition": [
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Humidity_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": true,
+                      "userValue": null,
+                      "dynamicValue": null
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "Hum_SHT"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "GREATER",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "High_humidity_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "High_humidity_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "High_humidity_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "High_temperature_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "High_temperature_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_humidity_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_humidity_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_temperature_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_temperature_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_voltage_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_voltage_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_voltage_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_voltage_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Temperature_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": false,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Temperature_alarm_switch",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Voltage_alarm_switch"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Voltage_alarm_switch",
+                        "inherit": false
+                      }
+                    }
+                  }
+                }
+              ],
+              "spec": {
+                "type": "SIMPLE"
+              }
+            },
+            "schedule": null,
+            "alarmDetails": "{\"Low_temperature_alarm\":${Low_temperature_alarm},\"High_temperature_alarm\":${High_temperature_alarm},\"Low_humidity_alarm\":${Low_humidity_alarm},\"High_humidity_alarm\":${High_humidity_alarm},\"Low_voltage_alarm\":${Low_voltage_alarm},\"Hum_SHT\":${Hum_SHT},\"Temperature_alarm_switch\":${Temperature_alarm_switch},\"Humidity_alarm_switch\":${Humidity_alarm_switch},\"Voltage_alarm_switch\":${Voltage_alarm_switch}}",
+            "dashboardId": null
+          }
+        },
+        "clearRule": {
+          "condition": {
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "Hum_SHT"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "LESS_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "High_humidity_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "High_humidity_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "High_humidity_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "High_temperature_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "High_temperature_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Humidity_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "High_temperature_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_humidity_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_humidity_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_temperature_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_temperature_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_voltage_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_voltage_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Temperature_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Temperature_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Voltage_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Voltage_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              }
+            ],
+            "spec": {
+              "type": "SIMPLE"
+            }
+          },
+          "schedule": null,
+          "alarmDetails": "{\"Low_temperature_alarm\":${Low_temperature_alarm},\"High_temperature_alarm\":${High_temperature_alarm},\"Low_humidity_alarm\":${Low_humidity_alarm},\"High_humidity_alarm\":${High_humidity_alarm},\"Low_voltage_alarm\":${Low_voltage_alarm},\"Hum_SHT\":${Hum_SHT},\"Temperature_alarm_switch\":${Temperature_alarm_switch},\"Humidity_alarm_switch\":${Humidity_alarm_switch},\"Voltage_alarm_switch\":${Voltage_alarm_switch}}",
+          "dashboardId": null
+        },
+        "propagate": false,
+        "propagateToOwner": false,
+        "propagateToOwnerHierarchy": false,
+        "propagateToTenant": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "c796d1fc-d5c4-a620-a71c-adc329889b88",
+        "alarmType": "Low humidity",
+        "createRules": {
+          "MAJOR": {
+            "condition": {
+              "condition": [
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Humidity_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": true,
+                      "userValue": null,
+                      "dynamicValue": null
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "Hum_SHT"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "LESS",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_humidity_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "High_humidity_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "High_humidity_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "High_temperature_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "High_temperature_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_humidity_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_humidity_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_temperature_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_temperature_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_voltage_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_voltage_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Temperature_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": false,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Temperature_alarm_switch",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Voltage_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": false,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Voltage_alarm_switch",
+                        "inherit": false
+                      }
+                    }
+                  }
+                }
+              ],
+              "spec": {
+                "type": "SIMPLE"
+              }
+            },
+            "schedule": null,
+            "alarmDetails": "{\"Low_temperature_alarm\":${Low_temperature_alarm},\"High_temperature_alarm\":${High_temperature_alarm},\"Low_humidity_alarm\":${Low_humidity_alarm},\"High_humidity_alarm\":${High_humidity_alarm},\"Low_voltage_alarm\":${Low_voltage_alarm},\"Hum_SHT\":${Hum_SHT},\"Temperature_alarm_switch\":${Temperature_alarm_switch},\"Humidity_alarm_switch\":${Humidity_alarm_switch},\"Voltage_alarm_switch\":${Voltage_alarm_switch}}",
+            "dashboardId": null
+          }
+        },
+        "clearRule": {
+          "condition": {
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "Hum_SHT"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "GREATER_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_humidity_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "High_humidity_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "High_humidity_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "High_temperature_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "High_temperature_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Humidity_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Humidity_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_humidity_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_humidity_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_temperature_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_temperature_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_voltage_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_voltage_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Temperature_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Temperature_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Voltage_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Voltage_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              }
+            ],
+            "spec": {
+              "type": "SIMPLE"
+            }
+          },
+          "schedule": null,
+          "alarmDetails": "{\"Low_temperature_alarm\":${Low_temperature_alarm},\"High_temperature_alarm\":${High_temperature_alarm},\"Low_humidity_alarm\":${Low_humidity_alarm},\"High_humidity_alarm\":${High_humidity_alarm},\"Low_voltage_alarm\":${Low_voltage_alarm},\"Hum_SHT\":${Hum_SHT},\"Temperature_alarm_switch\":${Temperature_alarm_switch},\"Humidity_alarm_switch\":${Humidity_alarm_switch},\"Voltage_alarm_switch\":${Voltage_alarm_switch}}",
+          "dashboardId": null
+        },
+        "propagate": false,
+        "propagateToOwner": false,
+        "propagateToOwnerHierarchy": false,
+        "propagateToTenant": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "fef40d2e-2fdc-d539-bfc1-2f280f1a4785",
+        "alarmType": "Low voltage",
+        "createRules": {
+          "WARNING": {
+            "condition": {
+              "condition": [
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Voltage_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": true,
+                      "userValue": null,
+                      "dynamicValue": null
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "BatV"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "LESS",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_voltage_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "High_humidity_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "High_humidity_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "High_temperature_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "High_temperature_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Humidity_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": false,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Humidity_alarm_switch",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_humidity_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_humidity_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_temperature_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_temperature_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Low_voltage_alarm"
+                  },
+                  "valueType": "NUMERIC",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 0,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Low_voltage_alarm",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "Temperature_alarm_switch"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": false,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "Temperature_alarm_switch",
+                        "inherit": false
+                      }
+                    }
+                  }
+                }
+              ],
+              "spec": {
+                "type": "SIMPLE"
+              }
+            },
+            "schedule": null,
+            "alarmDetails": "{\"Low_temperature_alarm\":${Low_temperature_alarm},\"High_temperature_alarm\":${High_temperature_alarm},\"Low_humidity_alarm\":${Low_humidity_alarm},\"High_humidity_alarm\":${High_humidity_alarm},\"Low_voltage_alarm\":${Low_voltage_alarm},\"battery_voltage\":${BatV},\"Temperature_alarm_switch\":${Temperature_alarm_switch},\"Humidity_alarm_switch\":${Humidity_alarm_switch},\"Voltage_alarm_switch\":${Voltage_alarm_switch}}",
+            "dashboardId": null
+          }
+        },
+        "clearRule": {
+          "condition": {
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "BatV"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "GREATER_OR_EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_voltage_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "High_humidity_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "High_humidity_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "High_temperature_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "High_temperature_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Humidity_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Humidity_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_humidity_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_humidity_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_temperature_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_temperature_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Low_voltage_alarm"
+                },
+                "valueType": "NUMERIC",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 0,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Low_voltage_alarm",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Temperature_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Temperature_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "Voltage_alarm_switch"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": false,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "Voltage_alarm_switch",
+                      "inherit": false
+                    }
+                  }
+                }
+              }
+            ],
+            "spec": {
+              "type": "SIMPLE"
+            }
+          },
+          "schedule": null,
+          "alarmDetails": "{\"Low_temperature_alarm\":${Low_temperature_alarm},\"High_temperature_alarm\":${High_temperature_alarm},\"Low_humidity_alarm\":${Low_humidity_alarm},\"High_humidity_alarm\":${High_humidity_alarm},\"Low_voltage_alarm\":${Low_voltage_alarm},\"battery_voltage\":${BatV},\"Temperature_alarm_switch\":${Temperature_alarm_switch},\"Humidity_alarm_switch\":${Humidity_alarm_switch},\"Voltage_alarm_switch\":${Voltage_alarm_switch}}",
+          "dashboardId": null
+        },
+        "propagate": false,
+        "propagateToOwner": false,
+        "propagateToOwnerHierarchy": false,
+        "propagateToTenant": false,
+        "propagateRelationTypes": null
+      },
+      {
+        "id": "2b02be13-69d8-1165-06a7-83a2426404d1",
+        "alarmType": "Device Disconnected",
+        "createRules": {
+          "CRITICAL": {
+            "condition": {
+              "condition": [
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "active"
+                  },
+                  "valueType": "BOOLEAN",
+                  "value": null,
+                  "predicate": {
+                    "type": "BOOLEAN",
+                    "operation": "NOT_EQUAL",
+                    "value": {
+                      "defaultValue": true,
+                      "userValue": null,
+                      "dynamicValue": null
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "lastActivityTime"
+                  },
+                  "valueType": "DATE_TIME",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 1727078115738,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "lastActivityTime",
+                        "inherit": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "key": {
+                    "type": "ATTRIBUTE",
+                    "key": "inactivityAlarmTime"
+                  },
+                  "valueType": "DATE_TIME",
+                  "value": null,
+                  "predicate": {
+                    "type": "NUMERIC",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": 1727081453881,
+                      "userValue": null,
+                      "dynamicValue": {
+                        "sourceType": "CURRENT_DEVICE",
+                        "sourceAttribute": "inactivityAlarmTime",
+                        "inherit": false
+                      }
+                    }
+                  }
+                }
+              ],
+              "spec": {
+                "type": "SIMPLE"
+              }
+            },
+            "schedule": null,
+            "alarmDetails": "{\"lastActivityTime\":${lastActivityTime},\"inactivityAlarmTime\":${inactivityAlarmTime}}",
+            "dashboardId": null
+          }
+        },
+        "clearRule": {
+          "condition": {
+            "condition": [
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "active"
+                },
+                "valueType": "BOOLEAN",
+                "value": null,
+                "predicate": {
+                  "type": "BOOLEAN",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": true,
+                    "userValue": null,
+                    "dynamicValue": null
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "lastActivityTime"
+                },
+                "valueType": "DATE_TIME",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 1727078527210,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "lastActivityTime",
+                      "inherit": false
+                    }
+                  }
+                }
+              },
+              {
+                "key": {
+                  "type": "ATTRIBUTE",
+                  "key": "inactivityAlarmTime"
+                },
+                "valueType": "DATE_TIME",
+                "value": null,
+                "predicate": {
+                  "type": "NUMERIC",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": 1727081539116,
+                    "userValue": null,
+                    "dynamicValue": {
+                      "sourceType": "CURRENT_DEVICE",
+                      "sourceAttribute": "inactivityAlarmTime",
+                      "inherit": false
+                    }
+                  }
+                }
+              }
+            ],
+            "spec": {
+              "type": "SIMPLE"
+            }
+          },
+          "schedule": null,
+          "alarmDetails": "{\"lastActivityTime\":${lastActivityTime},\"inactivityAlarmTime\":${inactivityAlarmTime}}",
+          "dashboardId": null
+        },
+        "propagate": false,
+        "propagateToOwner": false,
+        "propagateToOwnerHierarchy": false,
+        "propagateToTenant": false,
+        "propagateRelationTypes": null
+      }
+    ]
+  }
+}
