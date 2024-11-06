@@ -1,0 +1,566 @@
+{
+  "ruleChain": {
+    "name": "Dragino&GXHL,Ltd",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": true,
+    "configuration": null,
+    "additionalInfo": {
+      "description": ""
+    }
+  },
+  "metadata": {
+    "version": 1,
+    "firstNodeIndex": 19,
+    "nodes": [
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "defaultTTL": 0
+        },
+        "additionalInfo": {
+          "description": null,
+          "layoutX": 950,
+          "layoutY": 302
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgAttributesNode",
+        "name": "Save Attributes",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 2,
+        "configuration": {
+          "scope": "SERVER_SCOPE",
+          "notifyDevice": false,
+          "sendAttributesUpdatedNotification": false,
+          "updateAttributesOnlyOnValueChange": true
+        },
+        "additionalInfo": {
+          "description": null,
+          "layoutX": 951,
+          "layoutY": 198
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbMsgTypeSwitchNode",
+        "name": "Message Type Switch",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "version": 0
+        },
+        "additionalInfo": {
+          "description": null,
+          "layoutX": 517,
+          "layoutY": 333
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbLogNode",
+        "name": "Log RPC from Device",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "return '\\nIncoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);",
+          "tbelScript": "return '\\nIncoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);"
+        },
+        "additionalInfo": {
+          "layoutX": 951,
+          "layoutY": 412
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbLogNode",
+        "name": "Log Other",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "return '\\nIncoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);",
+          "tbelScript": "return '\\nIncoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);"
+        },
+        "additionalInfo": {
+          "layoutX": 951,
+          "layoutY": 525
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.rpc.TbSendRPCRequestNode",
+        "name": "RPC Call Request",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "timeoutInSeconds": 60
+        },
+        "additionalInfo": {
+          "layoutX": 951,
+          "layoutY": 614
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbOriginatorTypeFilterNode",
+        "name": "Is Entity Group",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "originatorTypes": [
+            "ENTITY_GROUP"
+          ]
+        },
+        "additionalInfo": {
+          "layoutX": 206,
+          "layoutY": 332
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbMsgTypeFilterNode",
+        "name": "Post attributes or RPC request",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "messageTypes": [
+            "POST_ATTRIBUTES_REQUEST",
+            "RPC_CALL_FROM_SERVER_TO_DEVICE"
+          ]
+        },
+        "additionalInfo": {
+          "layoutX": 270,
+          "layoutY": 140
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbDuplicateMsgToGroupNode",
+        "name": "Duplicate To Group Entities",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "entityGroupId": null,
+          "entityGroupIsMessageOriginator": true
+        },
+        "additionalInfo": {
+          "layoutX": 578,
+          "layoutY": 139
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Generate Report",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "ruleChainId": "ba0ab970-fe5e-11ee-bfdd-7feead216c91",
+          "forwardMsgToDefaultRuleChain": false
+        },
+        "additionalInfo": {
+          "description": "Forwards message to the \"Generate Report\" rule chain",
+          "layoutX": 955,
+          "layoutY": 721
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.integration.TbIntegrationDownlinkNode",
+        "name": "down",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "integrationId": "e217e850-6bf2-11ef-a329-6fb88c149adb"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 446,
+          "layoutY": 668
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "attr",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "tellFailureIfAbsent": true,
+          "fetchTo": "METADATA",
+          "clientAttributeNames": [],
+          "sharedAttributeNames": [],
+          "serverAttributeNames": [
+            "timevalue"
+          ],
+          "latestTsKeyNames": [],
+          "getLatestValueWithTs": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 374,
+          "layoutY": 511
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.mail.TbMsgToEmailNode",
+        "name": "Temperature Email",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "fromTemplate": "admin@thingseye.io",
+          "toTemplate": "zhugg@szgxhl.cn     ",
+          "ccTemplate": "luocy@szgxhl.cn",
+          "bccTemplate": "edwin@dragino.com,herong.lu@dragino.cc,zhijie.luo@dragino.cc,xiaoye@dragino.cc",
+          "subjectTemplate": "Device ${deviceName} Alarm",
+          "mailBodyType": "true",
+          "bodyTemplate": "$[data]"
+        },
+        "additionalInfo": {
+          "description": null,
+          "layoutX": 219,
+          "layoutY": 652
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.mail.TbSendEmailNode",
+        "name": "SendGrid SMTP",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "useSystemSmtpSettings": true,
+          "smtpHost": "smtp.sendgrid.net",
+          "smtpPort": 25,
+          "username": "apikey",
+          "password": "YOUR_API_PASSWORD",
+          "smtpProtocol": "smtp",
+          "timeout": 10000,
+          "enableTls": false
+        },
+        "additionalInfo": {
+          "description": null,
+          "layoutX": 465,
+          "layoutY": 742
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "emailltxt",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "function locatime(timenumber){\n    var date = new Date(timenumber)\n    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString()\n}\nvar name = msg.name\nvar devicename = msg.originatorName\nvar label = msg.originatorLabel\nvar status = msg.status\nvar detaildata =JSON.parse(msg.details.data)\nvar tempswitch\n\nif (name != \"Device Disconnected\") {\n    //detaildata=JSON.parse(msg.details.data)\n    if (detaildata.Temperature_alarm_switch == true) {\n        tempswitch = \"open\"\n    } else {\n        tempswitch = \"close\"\n    }\n    var humswitch\n    if (detaildata.Humidity_alarm_switch == true) {\n        humswitch = \"open\"\n    } else {\n        humswitch = \"close\"\n    }\n    var batswitch\n    if (detaildata.Voltage_alarm_switch == true) {\n        batswitch = \"open\"\n    } else {\n        batswitch = \"close\"\n    }\n    var str2 = \"<p>-- Temperature alarm switch status: \" +\n        tempswitch + \"</p>\" +\n        \"<p>-- Humidity alarm switch status: \" + humswitch +\n        \"</p>\" +\n        \"<p>-- Voltage alarm switch status: \" + batswitch\n}\n\nif (name == \"High Temperature\" && status ==\n    \"ACTIVE_UNACK\") {\n    var emailstr =\n        \"<div><p><span style='color: black; font-weight: bold'>\" +\n        \"Device \" + label + \" has alarm:</span></p>\" +\n        \"<p><span style='color: red; font-weight: bold'>-- High Temperature Alarm</span></p>\" +\n        \"<p>-- Current Temperature : \" + detaildata\n        .TempC_SHT + \"</p><br>\" +\n        \"<p>Device Configure:</p>\" +\n        \"<p>-- Temperature Threshold : min: \" + detaildata\n        .Low_temperature_alarm + \", max: \" + detaildata\n        .High_temperature_alarm + \"</p>\" +\n        \"<p>-- Humidity Threshold: min: \" + detaildata\n        .Low_humidity_alarm + \", max:\" + detaildata\n        .High_humidity_alarm + \"</p>\" +\n        \"<p>-- Battery threshold: min: \" + detaildata\n        .Low_voltage_alarm + \"</p>\" + str2 + \"</div>\"\n    return {\n        msg: {\n            \"data\": emailstr\n        },\n        metadata: metadata,\n        msgType: msgType\n    };\n} else if (name == \"Low Temperature\" && status ==\n    \"ACTIVE_UNACK\") {\n    var emailstr =\n        \"<div><p><span style='color: black; font-weight: bold'>\" +\n        \"Device \" + label + \" has alarm:</span></p>\" +\n        \"<p><span style='color: red; font-weight: bold'>-- Low Temperature Alarm</span></p>\" +\n        \"<p>-- Current Temperature : \" + detaildata\n        .TempC_SHT + \"</p><br>\" +\n        \"<p>Device Configure:</p>\" +\n        \"<p>-- Temperature Threshold : min: \" + detaildata\n        .Low_temperature_alarm + \", max: \" + detaildata\n        .High_temperature_alarm + \"</p>\" +\n        \"<p>-- Humidity Threshold: min: \" + detaildata\n        .Low_humidity_alarm + \", max:\" + detaildata\n        .High_humidity_alarm + \"</p>\" +\n        \"<p>-- Battery threshold: min: \" + detaildata\n        .Low_voltage_alarm + \"</p>\" + str2 + \"</div>\"\n\n    return {\n        msg: {\n            \"data\": emailstr\n        },\n        metadata: metadata,\n        msgType: msgType\n    };\n\n} else if (name == \"Device Disconnected\" && status ==\n    \"ACTIVE_UNACK\") {\n    var time1 = locatime(Number(detaildata.lastActivityTime))\n    //var time1 = detaildata.lastActivityTime\n    // var chazhi = parseInt((detaildata.inactivityAlarmTime-detaildata.lastActivityTime)/1000/60)\n    // var emailstr =\n    //     \"<div><p><span style='color: red; font-weight: bold'>\" +\n    //     \"Device \" + label + \" has Alarm</span></p><p>Last activity time: \"+time1+\"</p><p>Last Uplink: 21\"+\"minutes ago</p></div>\"\n        \n    var emailstr =\"Device \" + label + \" has Alarm##Last activity time: \"+time1+\"##Last Uplink: 21minutes ago\"\n    var newType = \"POST_TELEMETRY_REQUEST\"\n    return {\n        msg:emailstr,\n        metadata: metadata,\n        msgType: newType\n    }\n} else if (name == \"High humidity\" && status ==\n    \"ACTIVE_UNACK\") {\n    var emailstr =\n        \"<div><p><span style='color: black; font-weight: bold'>\" +\n        \"Device \" + label + \" has alarm:</span></p>\" +\n        \"<p><span style='color: red; font-weight: bold'>-- High Humidity Alarm</span></p>\" +\n        \"<p>-- Current Temperature : \" + detaildata\n        .Hum_SHT + \"</p><br>\" +\n        \"<p>Device Configure:</p>\" +\n        \"<p>-- Temperature Threshold : min: \" + detaildata\n        .Low_temperature_alarm + \", max: \" + detaildata\n        .High_temperature_alarm + \"</p>\" +\n        \"<p>-- Humidity Threshold: min: \" + detaildata\n        .Low_humidity_alarm + \", max:\" + detaildata\n        .High_humidity_alarm + \"</p>\" +\n        \"<p>-- Battery threshold: min: \" + detaildata\n        .Low_voltage_alarm + \"</p>\" + str2 + \"</div>\"\n\n    return {\n        msg: {\n            \"data\": emailstr\n        },\n        metadata: metadata,\n        msgType: msgType\n    };\n} else if (name == \"Low humidity\" && status ==\n    \"ACTIVE_UNACK\") {\n    var emailstr =\n        \"<div><p><span style='color: black; font-weight: bold'>\" +\n        \"Device \" + label + \" has alarm:</span></p>\" +\n        \"<p><span style='color: red; font-weight: bold'>-- Low Humidity Alarm</span></p>\" +\n        \"<p>-- Current Temperature : \" + detaildata\n        .Hum_SHT + \"</p><br>\" +\n        \"<p>Device Configure:</p>\" +\n        \"<p>-- Temperature Threshold : min: \" + detaildata\n        .Low_temperature_alarm + \", max: \" + detaildata\n        .High_temperature_alarm + \"</p>\" +\n        \"<p>-- Humidity Threshold: min: \" + detaildata\n        .Low_humidity_alarm + \", max:\" + detaildata\n        .High_humidity_alarm + \"</p>\" +\n        \"<p>-- Battery threshold: min: \" + detaildata\n        .Low_voltage_alarm + \"</p>\" + str2 + \"</div>\"\n\n    return {\n        msg: {\n            \"data\": emailstr\n        },\n        metadata: metadata,\n        msgType: msgType\n    };\n} else if (name == \"Low voltage\" && status ==\n    \"ACTIVE_UNACK\") {\n    var emailstr =\n        \"<div><p><span style='color: black; font-weight: bold'>\" +\n        \"Device \" + label + \" has alarm:</span></p>\" +\n        \"<p><span style='color: red; font-weight: bold'>-- Low Voltage Alarm</span></p>\" +\n        \"<p>-- Current Temperature : \" + detaildata.BatV +\n        \"</p><br>\" +\n        \"<p>Device Configure:</p>\" +\n        \"<p>-- Temperature Threshold : min: \" + detaildata\n        .Low_temperature_alarm + \", max: \" + detaildata\n        .High_temperature_alarm + \"</p>\" +\n        \"<p>-- Humidity Threshold: min: \" + detaildata\n        .Low_humidity_alarm + \", max:\" + detaildata\n        .High_humidity_alarm + \"</p>\" +\n        \"<p>-- Battery threshold: min: \" + detaildata\n        .Low_voltage_alarm + \"</p>\" + str2 + \"</div>\"\n\n    return {\n        msg: {\n            \"data\": emailstr\n        },\n        metadata: metadata,\n        msgType: msgType\n    };\n} else if (name == \"High Temperature\" && status ==\n    \"CLEARED_UNACK\") {\n    var emailstr =\n        \"<div><p><span style='color: green; font-weight: bold'>Device \" +\n        label +\n        \" High Temperature Alarm Cleared</span></p>\" +\n        \"<p>-- Current Temperature : \" + detaildata\n        .TempC_SHT + \"</p><br>\" +\n        \"<p>Device Configure:</p>\" +\n        \"<p>-- Temperature Threshold : min: \" + detaildata\n        .Low_temperature_alarm + \", max: \" + detaildata\n        .High_temperature_alarm + \"</p>\" +\n        \"<p>-- Humidity Threshold: min: \" + detaildata\n        .Low_humidity_alarm + \", max:\" + detaildata\n        .High_humidity_alarm + \"</p>\" +\n        \"<p>-- Battery threshold: min: \" + detaildata\n        .Low_voltage_alarm + \"</p>\" + str2 + \"</div>\"\n\n    return {\n        msg: {\n            \"data\": emailstr\n        },\n        metadata: metadata,\n        msgType: msgType\n    };\n} else if (name == \"Low Temperature\" && status ==\n    \"CLEARED_UNACK\") {\n    var emailstr =\n        \"<div><p><span style='color: green; font-weight: bold'>Device \" +\n        label +\n        \" Low Temperature Alarm Cleared</span></p>\" +\n        \"<p>-- Current Temperature : \" + detaildata\n        .TempC_SHT + \"</p><br>\" +\n        \"<p>Device Configure:</p>\" +\n        \"<p>-- Temperature Threshold : min: \" + detaildata\n        .Low_temperature_alarm + \", max: \" + detaildata\n        .High_temperature_alarm + \"</p>\" +\n        \"<p>-- Humidity Threshold: min: \" + detaildata\n        .Low_humidity_alarm + \", max:\" + detaildata\n        .High_humidity_alarm + \"</p>\" +\n        \"<p>-- Battery threshold: min: \" + detaildata\n        .Low_voltage_alarm + \"</p>\" + str2 + \"</div>\"\n\n    return {\n        msg: {\n            \"data\": emailstr\n        },\n        metadata: metadata,\n        msgType: msgType\n    };\n} else if (name == \"High humidity\" && status ==\n    \"CLEARED_UNACK\") {\n    var emailstr =\n        \"<div><p><span style='color: green; font-weight: bold'>Device \" +\n        label + \" High Humidity Alarm Cleared</span></p>\" +\n        \"<p>-- Current Temperature : \" + detaildata\n        .Hum_SHT + \"</p><br>\" +\n        \"<p>Device Configure:</p>\" +\n        \"<p>-- Temperature Threshold : min: \" + detaildata\n        .Low_temperature_alarm + \", max: \" + detaildata\n        .High_temperature_alarm + \"</p>\" +\n        \"<p>-- Humidity Threshold: min: \" + detaildata\n        .Low_humidity_alarm + \", max:\" + detaildata\n        .High_humidity_alarm + \"</p>\" +\n        \"<p>-- Battery threshold: min: \" + detaildata\n        .Low_voltage_alarm + \"</p>\" + str2 + \"</div>\"\n\n    return {\n        msg: {\n            \"data\": emailstr\n        },\n        metadata: metadata,\n        msgType: msgType\n    };\n} else if (name == \"Low humidity\" && status ==\n    \"CLEARED_UNACK\") {\n    var emailstr =\n        \"<div><p><span style='color: green; font-weight: bold'>Device \" +\n        label + \" Low Humidity Alarm Cleared</span></p>\" +\n        \"<p>-- Current Temperature : \" + detaildata\n        .Hum_SHT + \"</p><br>\" +\n        \"<p>Device Configure:</p>\" +\n        \"<p>-- Temperature Threshold : min: \" + detaildata\n        .Low_temperature_alarm + \", max: \" + detaildata\n        .High_temperature_alarm + \"</p>\" +\n        \"<p>-- Humidity Threshold: min: \" + detaildata\n        .Low_humidity_alarm + \", max:\" + detaildata\n        .High_humidity_alarm + \"</p>\" +\n        \"<p>-- Battery threshold: min: \" + detaildata\n        .Low_voltage_alarm + \"</p>\" + str2 + \"</div>\"\n    return {\n        msg: {\n            \"data\": emailstr\n        },\n        metadata: metadata,\n        msgType: msgType\n    };\n} else if (name == \"Low voltage\" && status ==\n    \"CLEARED_UNACK\") {\n\n    var emailstr =\n        \"<div><p><span style='color: green; font-weight: bold'>Device \" +\n        label + \" Low Voltage Alarm Cleared</span></p>\" +\n        \"<p>-- Current Temperature : \" + detaildata.BatV +\n        \"</p><br><br>\" +\n        \"<p>Device Configure:</p>\" +\n        \"<p>-- Temperature Threshold : min: \" + detaildata\n        .Low_temperature_alarm + \", max: \" + detaildata\n        .High_temperature_alarm + \"</p>\" +\n        \"<p>-- Humidity Threshold: min: \" + detaildata\n        .Low_humidity_alarm + \", max:\" + detaildata\n        .High_humidity_alarm + \"</p>\" +\n        \"<p>-- Battery threshold: min: \" + detaildata\n        .Low_voltage_alarm + \"</p>\" + str2 + \"</div>\"\n\n    return {\n        msg: {\n            \"data\": emailstr\n        },\n        metadata: metadata,\n        msgType: msgType\n    };\n} else if (name == \"Device Disconnected\" && status ==\n    \"CLEARED_UNACK\") {\n     var time1 = locatime(Number(detaildata.lastActivityTime))\n    //var time1 = detaildata.lastActivityTime\n    // var chazhi = parseInt((detaildata.inactivityAlarmTime-detaildata.lastActivityTime)/1000/60)\n    // var emailstr =\n    //     \"<div><p><span style='color: green; font-weight: bold'>\" +\n    //     \"Device \" + label + \" has Alarm Cleared</span></p><p>Last activity time: \"+time1+\"</p></div>\"\n    var emailstr =\"Device \" + label + \" has Alarm Cleared##Last activity time: \"+time1\n    var newType = \"POST_TELEMETRY_REQUEST\"\n    return {\n        msg: emailstr,\n        metadata: metadata,\n        msgType: newType\n    }\n}",
+          "tbelScript": "return {msg: msg, metadata: metadata, msgType: msgType};"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 135,
+          "layoutY": 760
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.debug.TbMsgGeneratorNode",
+        "name": "gatewaystauts",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 2,
+        "configuration": {
+          "msgCount": 0,
+          "periodInSeconds": 30,
+          "scriptLang": "JS",
+          "jsScript": "var data = \"Bearer NNSXS.QN2I4WO7D3BUKVAMSJGZZOYXJVLTKFM65E5L.TFXGXAAFECTYAYTGTZYWPEUKD7U56XUOW2FNMZ3YK6QRYJTF7MLQ\"\nvar metadata = { data: data };\nvar msgType = \"POST_TELEMETRY_REQUEST\";\nvar msg = \"test\"\nreturn { msg: msg, metadata: metadata, msgType: msgType };",
+          "tbelScript": "var msg = { temp: 42, humidity: 77 };\nvar metadata = { data: 40 };\nvar msgType = \"POST_TELEMETRY_REQUEST\";\n\nreturn { msg: msg, metadata: metadata, msgType: msgType };",
+          "originatorId": "32962440-7562-11ef-a329-6fb88c149adb",
+          "originatorType": "DEVICE"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 99,
+          "layoutY": 822
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.rest.TbRestApiCallNode",
+        "name": "getgateway",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 3,
+        "configuration": {
+          "restEndpointUrlPattern": "https://eu1.cloud.thethings.network/api/v3/gs/gateways/a840411e9b404915/connection/stats",
+          "requestMethod": "GET",
+          "useSimpleClientHttpFactory": false,
+          "parseToPlainText": false,
+          "ignoreRequestBody": false,
+          "enableProxy": false,
+          "useSystemProxyProperties": false,
+          "proxyScheme": null,
+          "proxyHost": null,
+          "proxyPort": 0,
+          "proxyUser": null,
+          "proxyPassword": null,
+          "readTimeoutMs": 0,
+          "maxParallelRequestsCount": 0,
+          "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer NNSXS.QN2I4WO7D3BUKVAMSJGZZOYXJVLTKFM65E5LFZA.TFXGXAAFECTYAYTGTZYWPEUKD7U56XUOW2FNMZ3YK6QRYJTF7MLQ"
+          },
+          "credentials": {
+            "type": "anonymous"
+          },
+          "maxInMemoryBufferSizeInKb": 256
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 415,
+          "layoutY": 815
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "jsscript",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "if (msg == \"test\") {\n    var newType = \"POST_ATTRIBUTES_REQUEST\"\n    return {\n        msg: {\n            \"gatewaystauts\": false\n        },\n        metadata: metadata,\n        msgType: newType\n    };\n}\nelse{\nvar timestamp = new Date().getTime();\nvar msg = msg.last_status_received_at\nvar msg2 = msg.replace(/\\.\\d*/, '')\nvar time = new Date(msg2).getTime()\nvar newType = \"POST_ATTRIBUTES_REQUEST\"\nif (timestamp-(time+28800000)<120000){\nreturn {\n    msg: {\n        \"gatewaytime\": time,\n        \"gatewaystauts\": true,\n    },\n    metadata: metadata,\n    msgType: newType\n}}\nelse{\n    return {\n    msg: {\n        \"gatewaytime\": time,\n        \"gatewaystauts\":false,\n    },\n    metadata: metadata,\n    msgType: newType\n}    \n}\n}",
+          "tbelScript": "return {msg: msg, metadata: metadata, msgType: msgType};"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 103,
+          "layoutY": 945
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgAttributesNode",
+        "name": "Save Attributes",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 2,
+        "configuration": {
+          "scope": "SERVER_SCOPE",
+          "notifyDevice": false,
+          "sendAttributesUpdatedNotification": false,
+          "updateAttributesOnlyOnValueChange": true
+        },
+        "additionalInfo": {
+          "description": null,
+          "layoutX": 400,
+          "layoutY": 944
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.profile.TbDeviceProfileNode",
+        "name": "Device Profile Node",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "persistAlarmRulesState": false,
+          "fetchAlarmRulesStateOnStart": "false"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 48,
+          "layoutY": 440
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.mqtt.TbMqttNode",
+        "name": "mqtt",
+        "debugMode": true,
+        "singletonMode": true,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "topicPattern": "/kazk/data",
+          "host": "8.217.91.207",
+          "port": 1883,
+          "connectTimeoutSec": 10,
+          "clientId": "edwin@dragino.com",
+          "appendClientIdSuffix": null,
+          "cleanSession": true,
+          "retainedMessage": false,
+          "ssl": false,
+          "credentials": {
+            "type": "basic",
+            "username": "usenamedragino",
+            "password": "passworddragino"
+          },
+          "parseToPlainText": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 774,
+          "layoutY": 822
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 2,
+        "toIndex": 0,
+        "type": "Post telemetry"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 1,
+        "type": "Activity Event"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 1,
+        "type": "Attributes Updated"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 1,
+        "type": "Inactivity Event"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 1,
+        "type": "Post attributes"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 3,
+        "type": "RPC Request from Device"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 4,
+        "type": "Other"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 5,
+        "type": "RPC Request to Device"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 9,
+        "type": "Generate Report"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 11,
+        "type": "Attributes Updated"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 2,
+        "type": "False"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 7,
+        "type": "True"
+      },
+      {
+        "fromIndex": 7,
+        "toIndex": 2,
+        "type": "False"
+      },
+      {
+        "fromIndex": 7,
+        "toIndex": 8,
+        "type": "True"
+      },
+      {
+        "fromIndex": 8,
+        "toIndex": 2,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 11,
+        "toIndex": 10,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 12,
+        "toIndex": 13,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 14,
+        "toIndex": 20,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 15,
+        "toIndex": 16,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 16,
+        "toIndex": 17,
+        "type": "Failure"
+      },
+      {
+        "fromIndex": 16,
+        "toIndex": 17,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 17,
+        "toIndex": 18,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 19,
+        "toIndex": 6,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 19,
+        "toIndex": 14,
+        "type": "Alarm Cleared"
+      },
+      {
+        "fromIndex": 19,
+        "toIndex": 14,
+        "type": "Alarm Created"
+      },
+      {
+        "fromIndex": 19,
+        "toIndex": 14,
+        "type": "Alarm Severity Updated"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}
