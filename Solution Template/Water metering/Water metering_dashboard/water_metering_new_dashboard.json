@@ -665,9 +665,12 @@
           "iconSize": "24px",
           "titleTooltip": "",
           "enableDataExport": false,
-          "units": "m³",
+          "units": "L",
           "decimals": 2,
-          "displayTimewindow": false
+          "displayTimewindow": false,
+          "widgetCss": "",
+          "pageSize": 1024,
+          "noDataDisplayMessage": ""
         },
         "id": "94d73536-d206-eb83-651a-36691a0abc2e",
         "typeFullFqn": "system.charts.timeseries_bars_flot"
@@ -1107,17 +1110,22 @@
                     }
                   },
                   "_hash": 0.04598716421616311,
-                  "units": "m³",
+                  "units": "L",
                   "decimals": null,
                   "funcBody": null,
                   "usePostProcessing": null,
-                  "postFuncBody": null
+                  "postFuncBody": null,
+                  "aggregationType": null
                 }
-              ]
+              ],
+              "alarmFilterConfig": {
+                "statusList": [
+                  "ACTIVE"
+                ]
+              }
             }
           ],
           "timewindow": {
-            "hideInterval": false,
             "hideAggregation": false,
             "hideAggInterval": false,
             "hideTimezone": false,
@@ -2663,11 +2671,12 @@
                     "useCellContentFunction": false
                   },
                   "_hash": 0.6622074305397865,
-                  "units": "m³",
+                  "units": "L",
                   "decimals": 2,
                   "postFuncBody": "return value || 0;",
                   "usePostProcessing": true,
-                  "funcBody": null
+                  "funcBody": null,
+                  "aggregationType": "NONE"
                 },
                 {
                   "name": "address",
@@ -3010,6 +3019,7 @@
           "datasources": [
             {
               "type": "entity",
+              "entityAliasId": "f7bed459-ea25-5a39-bfc1-a3bb8c941d8d",
               "dataKeys": [
                 {
                   "name": "meterReading",
@@ -3022,9 +3032,12 @@
                     "useCellContentFunction": false
                   },
                   "_hash": 0.6622074305397865,
-                  "units": "m³",
+                  "units": "L",
                   "decimals": 2,
-                  "postFuncBody": "return value || 0;"
+                  "postFuncBody": "return value || 0;",
+                  "usePostProcessing": true,
+                  "aggregationType": "NONE",
+                  "funcBody": null
                 },
                 {
                   "name": "active",
@@ -3040,7 +3053,11 @@
                   "postFuncBody": "if (value === 'true') {\n    return 'Active';\n} else {\n    return 'Inactive';\n}"
                 }
               ],
-              "entityAliasId": "f7bed459-ea25-5a39-bfc1-a3bb8c941d8d"
+              "alarmFilterConfig": {
+                "statusList": [
+                  "ACTIVE"
+                ]
+              }
             }
           ],
           "showTitleIcon": false,
@@ -9980,7 +9997,6 @@
       }
     },
     "timewindow": {
-      "hideInterval": false,
       "hideAggregation": false,
       "hideAggInterval": false,
       "hideTimezone": false,
