@@ -1,0 +1,254 @@
+{
+  "ruleChain": {
+    "name": "Gateway in TE",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null,
+    "additionalInfo": {
+      "description": ""
+    }
+  },
+  "metadata": {
+    "version": 3,
+    "firstNodeIndex": null,
+    "nodes": [
+      {
+        "type": "org.thingsboard.rule.engine.debug.TbMsgGeneratorNode",
+        "name": "TTN",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 2,
+        "configuration": {
+          "msgCount": 0,
+          "periodInSeconds": 30,
+          "scriptLang": "JS",
+          "jsScript": "var data = \"Bearer NNSXS.QN2I4WO7D3BUKVAMSJGZZOYXJVLTKFM65E5L.TFXGXAAFECTYAYTGTZYWPEUKD7U56XUOW2FNMZ3YK6QRYJTF7MLQ\"\nvar metadata = { data: data };\nvar msgType = \"POST_TELEMETRY_REQUEST\";\nvar msg = \"test\"\nreturn { msg: msg, metadata: metadata, msgType: msgType };",
+          "tbelScript": "",
+          "originatorId": "c1b2b540-abcb-11ef-9a99-19e40fc9a6b0",
+          "originatorType": "DEVICE"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 63,
+          "layoutY": 293
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.rest.TbRestApiCallNode",
+        "name": "gateway-TTN",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 3,
+        "configuration": {
+          "restEndpointUrlPattern": "https://eu1.cloud.thethings.network/api/v3/gs/gateways/a84041ffff295a36/connection/stats",
+          "requestMethod": "GET",
+          "useSimpleClientHttpFactory": false,
+          "parseToPlainText": false,
+          "ignoreRequestBody": false,
+          "enableProxy": false,
+          "useSystemProxyProperties": false,
+          "proxyScheme": null,
+          "proxyHost": null,
+          "proxyPort": 0,
+          "proxyUser": null,
+          "proxyPassword": null,
+          "readTimeoutMs": 0,
+          "maxParallelRequestsCount": 0,
+          "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer NNSXS.QN2I4WO7D3BUKVAMSJGZZOYXJVLTKFM65E5LFZA.TFXGXAAFECTYAYTGTZYWPEUKD7U56XUOW2FNMZ3YK6QRYJTF7MLQ"
+          },
+          "credentials": {
+            "type": "anonymous"
+          },
+          "maxInMemoryBufferSizeInKb": 256
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 339,
+          "layoutY": 290
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "jsscript",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "if (msg == \"test\") {\n    var newType = \"POST_ATTRIBUTES_REQUEST\"\n    return {\n        msg: {\n            \"gatewaystauts\": false\n        },\n        metadata: metadata,\n        msgType: newType\n    };\n}\nelse{\nvar timestamp = new Date().getTime();\nvar msg1 = msg.last_status_received_at\nvar msg2 = msg1.replace(/\\.\\d*/, '')\nvar time = new Date(msg2).getTime()\nvar gatewaytype = Object.keys(msg.last_status.versions)[0]\nvar type = \"TTN\"\nvar newType = \"POST_ATTRIBUTES_REQUEST\"\nif (timestamp-(time+28800000)<120000){\nreturn {\n    msg: {\n        \"gatewaytype\":type,\n        \"gatewaytime\": time,\n        \"gatewaystauts\": true,\n    },\n    metadata: metadata,\n    msgType: newType\n}}\nelse{\n    return {\n    msg: {\n        \"gatewaytype\":type,\n        \"gatewaytime\": time,\n        \"gatewaystauts\":false,\n    },\n    metadata: metadata,\n    msgType: newType\n}    \n}\n}",
+          "tbelScript": "return {msg: msg, metadata: metadata, msgType: msgType};"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 719,
+          "layoutY": 294
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgAttributesNode",
+        "name": "save",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 2,
+        "configuration": {
+          "scope": "SERVER_SCOPE",
+          "notifyDevice": false,
+          "sendAttributesUpdatedNotification": false,
+          "updateAttributesOnlyOnValueChange": true
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 975,
+          "layoutY": 292
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.debug.TbMsgGeneratorNode",
+        "name": "chirpstack",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 2,
+        "configuration": {
+          "msgCount": 0,
+          "periodInSeconds": 30,
+          "scriptLang": "JS",
+          "jsScript": "var data = \"Bearer NNSXS.QN2I4WO7D3BUKVAMSJGZZOYXJVLTKFM65E5L.TFXGXAAFECTYAYTGTZYWPEUKD7U56XUOW2FNMZ3YK6QRYJTF7MLQ\"\nvar metadata = { data: data };\nvar msgType = \"POST_TELEMETRY_REQUEST\";\nvar msg = \"test\"\nreturn { msg: msg, metadata: metadata, msgType: msgType };",
+          "tbelScript": "",
+          "originatorId": "c1b2b540-abcb-11ef-9a99-19e40fc9a6b0",
+          "originatorType": "DEVICE"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 60,
+          "layoutY": 416
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.rest.TbRestApiCallNode",
+        "name": "gateway-chirpstack",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 3,
+        "configuration": {
+          "restEndpointUrlPattern": "http://lns1.thingseye.io:8090/api/gateways/a84041ffff205818",
+          "requestMethod": "GET",
+          "useSimpleClientHttpFactory": false,
+          "parseToPlainText": false,
+          "ignoreRequestBody": false,
+          "enableProxy": false,
+          "useSystemProxyProperties": false,
+          "proxyScheme": null,
+          "proxyHost": null,
+          "proxyPort": 0,
+          "proxyUser": null,
+          "proxyPassword": null,
+          "readTimeoutMs": 0,
+          "maxParallelRequestsCount": 0,
+          "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjaGlycHN0YWNrIiwiaXNzIjoiY2hpcnBzdGFjayIsInN1YiI6IjRlMTE2MTJhLWE5YjItNDYyYi04Nzc1LWQ0YWM1N2Y4NjgxZCIsInR5cCI6ImtleSJ9.ZiAt8Z7YgaQ4ifD54LT1weFXc7KPE21hmlwo0sImFWE"
+          },
+          "credentials": {
+            "type": "anonymous"
+          },
+          "maxInMemoryBufferSizeInKb": 256
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 340,
+          "layoutY": 417
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "jsscript",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "if (msg == \"test\") {\n    var newType = \"POST_ATTRIBUTES_REQUEST\"\n    return {\n        msg: {\n            \"gatewaystauts\": false\n        },\n        metadata: metadata,\n        msgType: newType\n    };\n}\nelse{\nvar timestamp = new Date().getTime();\nvar msg1 = msg.lastSeenAt\nvar msg2 = msg1.replace(/\\.\\d*/, '')\nvar time = new Date(msg2).getTime()\nvar type = \"ChirpStack\"\n\nvar newType = \"POST_ATTRIBUTES_REQUEST\"\nif (timestamp-(time+28800000)<120000){\nreturn {\n    msg: {\n        \"gatewaytype\":type,\n        \"gatewaytime\": time,\n        \"gatewaystauts\": true,\n    },\n    metadata: metadata,\n    msgType: newType\n}}\nelse{\n    return {\n    msg: {\n        \"gatewaytype\":type,\n        \"gatewaytime\": time,\n        \"gatewaystauts\":false,\n    },\n    metadata: metadata,\n    msgType: newType\n}    \n}\n}",
+          "tbelScript": "return {msg: msg, metadata: metadata, msgType: msgType};"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 720,
+          "layoutY": 421
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgAttributesNode",
+        "name": "save",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 2,
+        "configuration": {
+          "scope": "SERVER_SCOPE",
+          "notifyDevice": false,
+          "sendAttributesUpdatedNotification": false,
+          "updateAttributesOnlyOnValueChange": true
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 986,
+          "layoutY": 421
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 0,
+        "toIndex": 1,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 2,
+        "type": "Failure"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 2,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 3,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 5,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 5,
+        "toIndex": 6,
+        "type": "Failure"
+      },
+      {
+        "fromIndex": 5,
+        "toIndex": 6,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 7,
+        "type": "Success"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}
