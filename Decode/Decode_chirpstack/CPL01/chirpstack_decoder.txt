@@ -41,19 +41,19 @@ function Decode(fPort, bytes, variables) {
     var alarm=(bytes[0]&0x02)?"TRUE":"FALSE";
     var pin_status=(bytes[0]&0x01)?"DISCONNECT":"CONNECT"; 
     var calculate_flag=(bytes[0]&0xFC)>>2;
-    var total_pulse=bytes[1]<<16 | bytes[2]<<8 | bytes[3];
+    var pulseCounter=bytes[1]<<16 | bytes[2]<<8 | bytes[3];
     var disconnect_duration=bytes[4]<<16 | bytes[5]<<8 | bytes[6];
     var data_time= getMyDate((bytes[7]<<24 | bytes[8]<<16 | bytes[9]<<8 | bytes[10]).toString(10));
     
     if(bytes.length==11)
     {
       return {
-      ALARM:alarm,
-      PIN_STATUS:pin_status,
-      CALCULATE_FLAG:calculate_flag,
-      TOTAL_PULSE:total_pulse,
-      LAST_DISCONNECT_DURATION:disconnect_duration,
-      TIME:data_time,
+      alarm:alarm,
+      pin_status:pin_status,
+      calculate_flag:calculate_flag,
+      pulseCounter:pulseCounter,
+      last_disconnect_duration:disconnect_duration,
+      time:data_time,
       "lora node": "CPL01",
       }
     }
@@ -81,11 +81,11 @@ function Decode(fPort, bytes, variables) {
     var trigger_mode = bytes[7]&0x01;
     
     return {
-    TDC:tdc,
-    DISALARM:disalarm,
-    KEEP_STATUS:keep_status,
-    KEEP_TIME:keep_time,
-    TRIGGER_MODE:trigger_mode
+    tdc:tdc,
+    disalarm:disalarm,
+    keep_status:keep_status,
+    keep_time:keep_time,
+    trigget_mode:trigger_mode
     }
   }
   else if(fPort==0x05)
@@ -138,7 +138,7 @@ function Decode(fPort, bytes, variables) {
     FIRMWARE_VERSION:firm_ver,
     FREQUENCY_BAND:freq_band,
     SUB_BAND:sub_band,
-    BAT:bat,
+    battery:bat,
     }
   }
 } 
