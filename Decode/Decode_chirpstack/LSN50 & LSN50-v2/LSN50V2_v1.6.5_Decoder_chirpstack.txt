@@ -12,7 +12,7 @@ var data={
     }[(bytes[6] & 0x7C)>>2],
 
     //Battery,units:V
-    BatV:
+    battery:
     {
       "0": (bytes[0]<<8 | bytes[1])/1000,
       "1": (bytes[0]<<8 | bytes[1])/1000,
@@ -23,7 +23,7 @@ var data={
     }[(bytes[6] & 0x7C)>>2],
     
     //DS18B20,PB3,units:â„?
-    TempC1:
+    temperature1:
     {
       "0": ((bytes[2]<<24>>16 | bytes[3])/10).toFixed(2),
       "1": ((bytes[2]<<24>>16 | bytes[3])/10).toFixed(2),
@@ -65,7 +65,7 @@ var data={
     }[(bytes[6] & 0x7C)>>2],    
     
     //Status of door sensor,PB14 
-    Door_status:
+    door_status:
     {
       "0": (bytes[6] & 0x80)? "CLOSE":"OPEN",
       "1": (bytes[6] & 0x80)? "CLOSE":"OPEN",
@@ -75,20 +75,20 @@ var data={
     }[(bytes[6] & 0x7C)>>2],
     
     //SHT2X,SHT3X temperature,PB6,PB7,units:â„?
-    TempC_SHT:
+    temperature:
     {
       "0":((bytes[7]<<24>>16 | bytes[8])/10).toFixed(2),
       "2":((bytes[7]<<24>>16 | bytes[8])/10).toFixed(2),
     }[(bytes[6] & 0x7C)>>2],    
     //SHT2X,SHT3X Humidity,PB6,PB7,units:%
-    Hum_SHT:
+    humidity:
     {
       "0": ((bytes[9]<<8 | bytes[10])/10) .toFixed(1),
       "2": ((bytes[9]<<8 | bytes[10])/10) .toFixed(1),
     }[(bytes[6] & 0x7C)>>2],
     
     //Distance,PA11,PB12,units:cm;
-    Distance:
+    distance:
     {
       "1":((bytes[7]<<8 | bytes[8])/10) .toFixed(1),
     }[(bytes[6] & 0x7C)>>2],
@@ -105,24 +105,24 @@ var data={
     }[(bytes[6] & 0x7C)>>2],
   
     //DS18B20,PA9,units:â„?
-    TempC2:
+    temperature2:
     {
       "3":((bytes[7]<<24>>16 | bytes[8])/10).toFixed(2),
     }[(bytes[6] & 0x7C)>>2],
     //DS18B20,PA10,units:â„?
-    TempC3:
+    temperature3:
     {
       "3":((bytes[9]<<24>>16 | bytes[10])/10).toFixed(2),
     }[(bytes[6] & 0x7C)>>2],
   
     //Weight,PA11,PB12,units:g;
-    Weight:
+    weight:
     {
       "4":(bytes[7]<<24>>16 | bytes[8]),
     }[(bytes[6] & 0x7C)>>2],
     
     //interrupt count
-    Count:
+    count:
     {
       "5":(bytes[7]<<24 | bytes[8]<<16 | bytes[9]<<8 | bytes[10]),
     }[(bytes[6] & 0x7C)>>2],
