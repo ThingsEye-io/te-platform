@@ -1,0 +1,21 @@
+function decodeUplink(input) {
+        return { 
+            data: Decode(input.fPort, input.bytes, input.variables)
+        };   
+}
+function Decode(fPort, bytes, variables) {
+   var decode = {}; 
+   var value=(bytes[0]<<8 | bytes[1]) & 0x3FFF;
+   decode.battery= value/1000;
+   decode.exti_trigger=(bytes[0] & 0x80)? "TRUE":"FALSE";
+   decode.distance1=(bytes[2]<<8 | bytes[3])/10;
+   decode.distance2=(bytes[4]<<8 | bytes[5])/10;
+   decode.distance3=(bytes[6]<<8 | bytes[7])/10
+   decode.distance4=(bytes[8]<<8 | bytes[9])/10;
+   decode.mes_type= bytes[10];
+
+   if(!((bytes[0]==0x03)&&(bytes[10]==0x02)))
+   {
+     return decode;
+   }
+}
