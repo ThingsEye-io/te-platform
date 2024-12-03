@@ -45,13 +45,13 @@ function Decode(fPort, bytes, variables) {
   {
     var decode = {}; 
     var value=(bytes[0]<<8 | bytes[1]) & 0x3FFF;
-    decode.BatV= value/1000;
-    decode.EXTI_Trigger=(bytes[0] & 0x40)? "TRUE":"FALSE";
-    decode.EXTI_Level=(bytes[0] & 0x80)? "HIGH":"LOW";
-    decode.distance1_cm=(bytes[2]<<8 | bytes[3])/10;
-    decode.distance2_cm=(bytes[4]<<8 | bytes[5])/10;
-    decode.distance3_cm=(bytes[6]<<8 | bytes[7])/10
-    decode.distance4_cm=(bytes[8]<<8 | bytes[9])/10;
+    decode.battery= value/1000;
+    decode.exti_trigger=(bytes[0] & 0x40)? "TRUE":"FALSE";
+    decode.exti_level=(bytes[0] & 0x80)? "HIGH":"LOW";
+    decode.distance1=(bytes[2]<<8 | bytes[3])/10;
+    decode.distance2=(bytes[4]<<8 | bytes[5])/10;
+    decode.distance3=(bytes[6]<<8 | bytes[7])/10
+    decode.distance4=(bytes[8]<<8 | bytes[9])/10;
     decode.mes_type= bytes[10];
    
     if(bytes.length==11)
@@ -129,7 +129,7 @@ function Decode(fPort, bytes, variables) {
       FIRMWARE_VERSION:firm_ver,
       FREQUENCY_BAND:freq_band,
       SUB_BAND:sub_band,
-      BAT:bat,
+      battery:bat,
   	}
   }  
 }
