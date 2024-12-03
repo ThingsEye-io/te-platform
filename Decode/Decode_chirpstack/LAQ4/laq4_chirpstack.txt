@@ -1,0 +1,29 @@
+function Decode(fPort, bytes, variables) {
+  var mode=(bytes[2] & 0x7C)>>2;
+  var data = {};
+  data.battery=(bytes[0]<<8 | bytes[1])/1000; 
+  if(mode==1)
+  {
+    data.work_mode="CO2";
+    data.alarm_status=(bytes[2] & 0x01)? "TRUE":"FALSE"; 
+    data.tvoc_ppb= bytes[3]<<8 | bytes[4]; 
+    data.co2_ppm= bytes[5]<<8 | bytes[6];
+    data.temperature=parseFloat(((bytes[7]<<24>>16 | bytes[8])/10).toFixed(2));
+    data.humidity=parseFloat(((bytes[9]<<8 | bytes[10])/10).toFixed(1));  
+  }
+  else if(mode==31)
+  {
+    data.work_mode="ALARM";
+    data.shtempmin= bytes[3]<<24>>24;
+    data.shtempmax= bytes[4]<<24>>24;   
+    data.shthummin= bytes[5];
+    data.shthummax= bytes[6]; 
+    data.co2min= bytes[7]<<8 | bytes[8]; 
+    data.co2max= bytes[9]<<8 | bytes[10]; 
+  }
+  
+  if(bytes.length==11)
+  {
+    return data;
+  }
+}
