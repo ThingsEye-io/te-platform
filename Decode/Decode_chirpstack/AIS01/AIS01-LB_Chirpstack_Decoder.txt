@@ -86,9 +86,9 @@ function Decode(fPort, bytes, variables) {
           reading =integer+(decimal/10000000);
         }
         return {
-        BatV:batV,
-        Data_Time:Data_time,
-        Reading:reading,
+        battery:batV,
+        data_time:Data_time,
+        reading:reading,
                 "lora node":"AIS01-LB"
         };        
   }
@@ -113,8 +113,8 @@ function Decode(fPort, bytes, variables) {
           reading =integer+(decimal/10000000);
         }
         return {
-        BatV:batV,
-        Data_Time:Data_time,
+        battery:batV,
+        data_time:Data_time,
         total_packages:total_packages,
         subcontracting_count:subcontracting_count,
         imgdata:base64data
@@ -204,7 +204,7 @@ if (fPort === 0x04)
         batV= (bytes[5]<<8 | bytes[6])/1000;
    
         return {
-        BatV:batV,
+        battery:batV,
         SENSOR_MODEL:sensor_mode,
         FIRMWARE_VERSION:firm_ver,
         FREQUENCY_BAND:freq_band,
