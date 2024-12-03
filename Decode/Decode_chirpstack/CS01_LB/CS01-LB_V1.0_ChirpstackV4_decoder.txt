@@ -52,21 +52,21 @@ function Decode(fPort, bytes, variables) {
   {
     var decode = {}; 
     var value=(bytes[0]<<8 | bytes[1]) & 0x3FFF;
-    decode.BatV= value/1000;
-    decode.EXTI_Trigger=(bytes[0] & 0x40)? "TRUE":"FALSE";
-    decode.EXTI_Level=(bytes[0] & 0x80)? "HIGH":"LOW";
-    decode.Current1_A=(bytes[2]<<8 | bytes[3])/100;
-    decode.Current2_A=(bytes[4]<<8 | bytes[5])/100;
-    decode.Current3_A=(bytes[6]<<8 | bytes[7])/100;
-    decode.Current4_A=(bytes[8]<<8 | bytes[9])/100;
-    decode.Cur1L_status= (bytes[10] &0x80)? "True":"False";
-    decode.Cur1H_status= (bytes[10] &0x40)? "True":"False";
-    decode.Cur2L_status= (bytes[10] &0x20)? "True":"False";
-    decode.Cur2H_status= (bytes[10] &0x10)? "True":"False";   
-    decode.Cur3L_status= (bytes[10] &0x08)? "True":"False";
-    decode.Cur3H_status= (bytes[10] &0x04)? "True":"False";
-    decode.Cur4L_status= (bytes[10] &0x02)? "True":"False";
-    decode.Cur4H_status= (bytes[10] &0x01)? "True":"False"; 
+    decode.battery= value/1000;
+    decode.exti_trigger=(bytes[0] & 0x40)? "TRUE":"FALSE";
+    decode.exti_level=(bytes[0] & 0x80)? "HIGH":"LOW";
+    decode.current1_a=(bytes[2]<<8 | bytes[3])/100;
+    decode.current2_a=(bytes[4]<<8 | bytes[5])/100;
+    decode.current3_a=(bytes[6]<<8 | bytes[7])/100;
+    decode.current4_a=(bytes[8]<<8 | bytes[9])/100;
+    decode.cur1l_status= (bytes[10] &0x80)? "True":"False";
+    decode.cur1h_status= (bytes[10] &0x40)? "True":"False";
+    decode.cur2l_status= (bytes[10] &0x20)? "True":"False";
+    decode.cur2h_status= (bytes[10] &0x10)? "True":"False";   
+    decode.cur3l_status= (bytes[10] &0x08)? "True":"False";
+    decode.cur3h_status= (bytes[10] &0x04)? "True":"False";
+    decode.cur4l_status= (bytes[10] &0x02)? "True":"False";
+    decode.cur4h_status= (bytes[10] &0x01)? "True":"False"; 
    
     if(bytes.length==11)
     {
@@ -85,7 +85,7 @@ function Decode(fPort, bytes, variables) {
         data_sum+=data;
     }
     return{
-    Bat_V:Bat,
+    battery:Bat,
     DATALOG:data_sum
     };    
   }  
@@ -159,7 +159,7 @@ function Decode(fPort, bytes, variables) {
       FIRMWARE_VERSION:firm_ver,
       FREQUENCY_BAND:freq_band,
       SUB_BAND:sub_band,
-      BAT:bat,
+      battery:bat,
   	}
   }  
 }
