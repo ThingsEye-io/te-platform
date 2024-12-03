@@ -43,15 +43,15 @@ function Decode(fPort, bytes, variables) {
   if(fPort==0x02)
   {
     var decode = {};
-    decode.BatV=(bytes[0]<<8 | bytes[1])/1000;
-    decode.Temperature= parseFloat(((bytes[2]<<24>>16 | bytes[3])/10).toFixed(1));
-    decode.Humidity= parseFloat(((bytes[4]<<8 | bytes[5])/10).toFixed(1));
-    decode.Air_pressure= parseFloat(((bytes[6]<<8 | bytes[7])/10).toFixed(1));
-    decode.Co2= bytes[8]<<8 | bytes[9];
-    decode.TEMPL_flag= (bytes[10] &0x08)? "True":"False";
-    decode.TEMPH_flag= (bytes[10] &0x04)? "True":"False";
-    decode.CO2L_flag= (bytes[10] &0x02)? "True":"False";
-    decode.CO2H_flag= (bytes[10] &0x01)? "True":"False"; 
+    decode.battery=(bytes[0]<<8 | bytes[1])/1000;
+    decode.temperature= parseFloat(((bytes[2]<<24>>16 | bytes[3])/10).toFixed(1));
+    decode.humidity= parseFloat(((bytes[4]<<8 | bytes[5])/10).toFixed(1));
+    decode.air_pressure= parseFloat(((bytes[6]<<8 | bytes[7])/10).toFixed(1));
+    decode.co2= bytes[8]<<8 | bytes[9];
+    decode.templ_flag= (bytes[10] &0x08)? "True":"False";
+    decode.temph_flag= (bytes[10] &0x04)? "True":"False";
+    decode.co2l_flag= (bytes[10] &0x02)? "True":"False";
+    decode.co2h_flag= (bytes[10] &0x01)? "True":"False"; 
       
     if(bytes.length==11)
       return decode;
@@ -126,7 +126,7 @@ function Decode(fPort, bytes, variables) {
       FIRMWARE_VERSION:firm_ver,
       FREQUENCY_BAND:freq_band,
       SUB_BAND:sub_band,
-      BatV:bat,
+      battery:bat,
   	}
   }
 }
