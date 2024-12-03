@@ -78,14 +78,14 @@ function Decode(fPort, bytes, variables) {
     var alarm_tdc= bytes[10];
    
     return {
-    TDC:tdc,
-    DISALARM:disalarm,
-    KEEP_STATUS:keep_status,
-    KEEP_TIME:keep_time,
-    TTRIG_MOD1:ttrig_mod1,
-    TTRIG_MOD2:ttrig_mod2,
-    TTRIG_MOD3:ttrig_mod3,
-    ALARM_TDC:alarm_tdc
+    tdc:tdc,
+    disalarm:disalarm,
+    keep_status:keep_status,
+    keep_time:keep_time,
+    ttrig_mod1:ttrig_mod1,
+    ttrig_mod2:ttrig_mod2,
+    ttrig_mod3:ttrig_mod3,
+    alarm_tdc:alarm_tdc
     };
   }
   else if(fPort==0x05)
@@ -139,7 +139,7 @@ function Decode(fPort, bytes, variables) {
     FIRMWARE_VERSION:firm_ver,
     FREQUENCY_BAND:freq_band,
     SUB_BAND:sub_band,
-    BAT:bat,
+    battery:bat,
     };
   }
   else
@@ -161,27 +161,27 @@ function Decode(fPort, bytes, variables) {
     if(bytes.length==11)
     {
       return {
-      WORKMOD:work_mod,       
-      CMOD:count_mod,  
-      TDC:tdc_interval,        
-      ALARM:alarm,
-      PIN_STATUS:pin_status,
-      TTRIG_MOD:ttrig_mod,
-      TOTAL_PULSE:total_pulse,
-      LAST_DURATION:last_duration,
-      TIME:data_time
+      work_mod:work_mod,       
+      count_mod:count_mod,  
+      tdc:tdc_interval,        
+      alarm:alarm,
+      pin_status:pin_status,
+      ttrig_mod:ttrig_mod,
+      pulsecounter:total_pulse,
+      last_duration:last_duration,
+      time:data_time
       };
     }
     else if(bytes.length==10)
     {
       return {
-      WORKMOD:work_mod,
-      CMOD:count_mod,  
-      TDC:tdc_interval,
-      CALCULATE_FLAG:calculate_flag,
-      PA8_TOTAL_PULSE:pa8_total_pulse,
-      PA4_TOTAL_PULSE:pa4_total_pulse,
-      PB15_TOTAL_PULSE:pb15_total_pulse
+      work_mod:work_mod,
+      count_mod:count_mod,  
+      tdc:tdc_interval,
+      calculate_flag:calculate_flag,
+      pa8_pulsecounter:pa8_total_pulse,
+      pa4_pulsecounter:pa4_total_pulse,
+      pb15_pulsecounter:pb15_total_pulse
       };      
     }
   }
