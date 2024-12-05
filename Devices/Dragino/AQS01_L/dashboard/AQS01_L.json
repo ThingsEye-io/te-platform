@@ -949,9 +949,9 @@
       }
     },
     "states": {
-      "aqs01": {
-        "name": "AQS01",
-        "root": true,
+      "dragino aqs01_l": {
+        "name": "Dragino AQS01_L",
+        "root": false,
         "layouts": {
           "main": {
             "widgets": {
