@@ -630,9 +630,9 @@
       }
     },
     "states": {
-      "default": {
-        "name": "RS485",
-        "root": true,
+      "dragino_rs485_cb": {
+        "name": "Dragino RS485-CB",
+        "root": false,
         "layouts": {
           "main": {
             "widgets": {
