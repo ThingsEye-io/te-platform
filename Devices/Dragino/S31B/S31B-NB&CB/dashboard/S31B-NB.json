@@ -1358,9 +1358,9 @@
       }
     },
     "states": {
-      "s31b": {
-        "name": "s31b",
-        "root": true,
+      "dragino_s31_nb": {
+        "name": "Dragino S31-NB",
+        "root": false,
         "layouts": {
           "main": {
             "widgets": {
