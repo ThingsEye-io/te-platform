@@ -1828,9 +1828,9 @@
       }
     },
     "states": {
-      "default": {
-        "name": "LDS12-NB",
-        "root": true,
+      "dragino_lds12_nb": {
+        "name": "Dragino LDS12-NB",
+        "root": false,
         "layouts": {
           "main": {
             "widgets": {
