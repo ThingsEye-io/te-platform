@@ -449,9 +449,9 @@
       }
     },
     "states": {
-      "lds02": {
-        "name": "LDS02",
-        "root": true,
+      "dragino lds02": {
+        "name": "Dragino LDS02",
+        "root": false,
         "layouts": {
           "main": {
             "widgets": {
