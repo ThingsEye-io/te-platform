@@ -1480,9 +1480,9 @@
       }
     },
     "states": {
-      "lht65n": {
-        "name": "LHT65N",
-        "root": true,
+      "dragino lht65n": {
+        "name": "Dragino LHT65N",
+        "root": false,
         "layouts": {
           "main": {
             "widgets": {
