@@ -1354,9 +1354,9 @@
       }
     },
     "states": {
-      "default": {
+      "dragino_ai01-cb": {
         "name": "Dragino AI01-CB",
-        "root": true,
+        "root": false,
         "layouts": {
           "main": {
             "widgets": {
