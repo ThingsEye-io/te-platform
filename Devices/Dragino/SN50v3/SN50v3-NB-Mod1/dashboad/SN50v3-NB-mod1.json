@@ -1884,9 +1884,9 @@
       }
     },
     "states": {
-      "default": {
-        "name": "SN50v3-NB",
-        "root": true,
+      "dragino_sn50v3_nb_mod_1": {
+        "name": "Dragino SN50V3-NB Mod 1",
+        "root": false,
         "layouts": {
           "main": {
             "widgets": {
