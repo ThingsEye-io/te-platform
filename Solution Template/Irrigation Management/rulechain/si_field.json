@@ -1,0 +1,794 @@
+{
+  "ruleChain": {
+    "name": "SI Field",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null,
+    "additionalInfo": {
+      "description": ""
+    }
+  },
+  "metadata": {
+    "version": 20,
+    "firstNodeIndex": 0,
+    "nodes": [
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbMsgTypeSwitchNode",
+        "name": "SwitchEventType",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "version": 0
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 58,
+          "layoutY": 488
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save telemetry",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "defaultTTL": 0,
+          "skipLatestPersistence": false,
+          "useServerTs": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 165,
+          "layoutY": 383
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "To Irrigation Start",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "var newMsg = {\n    currentIrrigationWaterConsumption: 0,\n    irrigationState: \"ON\",\n    irrigationTask: {\n        startTs: Date.now(), \n        durationThreshold: (msg.durationInMinutes ? msg.durationInMinutes * 60 * 1000 : 0),\n        consumptionThreshold: msg.volumeInLitters,\n        consumption: 0\n    }\n}\n\nreturn {msg: newMsg, metadata: metadata, msgType: \"POST_TELEMETRY_REQUEST\"};",
+          "tbelScript": "var newMsg = {\n    currentIrrigationWaterConsumption: 0,\n    irrigationState: \"ON\",\n    irrigationTask: {\n        startTs: Date.now(), \n        durationThreshold: (msg.durationInMinutes != null ? msg.durationInMinutes * 60 * 1000 : 0),\n        consumptionThreshold: msg.volumeInLitters,\n        consumption: 0\n    }\n};\n\nreturn {msg: newMsg, metadata: metadata, msgType: \"POST_TELEMETRY_REQUEST\"};"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 636,
+          "layoutY": 488
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbCheckMessageNode",
+        "name": "IsMsgFromWaterMeter",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "messageNames": [
+            "waterConsumption"
+          ],
+          "metadataNames": [],
+          "checkAllKeys": true
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 434,
+          "layoutY": 382
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbMsgTypeFilterNode",
+        "name": "Start Irrigation Using Volume",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "messageTypes": [
+            "START_IRRIGATION"
+          ]
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 325,
+          "layoutY": 488
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "defaultTTL": 0,
+          "skipLatestPersistence": false,
+          "useServerTs": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 935,
+          "layoutY": 485
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbChangeOriginatorNode",
+        "name": "To Smart Valve",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "originatorSource": "RELATED",
+          "relationsQuery": {
+            "fetchLastLevelOnly": false,
+            "direction": "FROM",
+            "maxLevel": 1,
+            "filters": [
+              {
+                "relationType": "FieldToSmartValve",
+                "entityTypes": [
+                  "DEVICE"
+                ]
+              }
+            ]
+          },
+          "preserveOriginatorIfCustomer": true
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1232,
+          "layoutY": 485
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "Turn on the switch.",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "var msg = { RO1_status: \"on\", params: {} };\nvar metadata = { \n    expirationTime: Date.now() + 300000,\n    oneway: true,\n    persistent: true\n};\nreturn { msg: msg, metadata: metadata, msgType: msgType };",
+          "tbelScript": "var msg = { method: \"0A 06 01\", params: {} };\nvar metadata = { \n    expirationTime: Date.now() + 300000,\n    oneway: true,\n    persistent: true\n};\nreturn { msg: msg, metadata: metadata, msgType: msgType };"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1234,
+          "layoutY": 576
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.math.TbMathNode",
+        "name": "calculateIrrigationWaterConsumption",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "operation": "ADD",
+          "arguments": [
+            {
+              "type": "MESSAGE_BODY",
+              "key": "waterConsumption",
+              "name": "x",
+              "defaultValue": "0"
+            },
+            {
+              "type": "TIME_SERIES",
+              "key": "currentIrrigationWaterConsumption",
+              "name": "y",
+              "defaultValue": "0"
+            }
+          ],
+          "result": {
+            "type": "TIME_SERIES",
+            "key": "currentIrrigationWaterConsumption",
+            "resultValuePrecision": 2,
+            "addToBody": true,
+            "addToMetadata": false
+          }
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1125,
+          "layoutY": 243
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "Fetch Task",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "tellFailureIfAbsent": true,
+          "clientAttributeNames": [],
+          "sharedAttributeNames": [],
+          "serverAttributeNames": [],
+          "latestTsKeyNames": [
+            "irrigationTask"
+          ],
+          "getLatestValueWithTs": true,
+          "fetchTo": "METADATA"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 968,
+          "layoutY": 381
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Should Turn Off?",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "var irrigationTask = JSON.parse(metadata.irrigationTask);\nif(irrigationTask.value.durationThreshold > 0){\n    return (irrigationTask.value.startTs + irrigationTask.value.durationThreshold) < Date.now();\n} else {\n    return msg.currentIrrigationWaterConsumption >= irrigationTask.value.consumptionThreshold;\n}",
+          "tbelScript": "var irrigationTask = JSON.parse(metadata.irrigationTask);\nif (irrigationTask == null || irrigationTask.value == null) {\n    return true;\n}\nif(irrigationTask.value.durationThreshold > 0){\n    return (irrigationTask.value.startTs + irrigationTask.value.durationThreshold) < Date.now();\n} else {\n    return msg.currentIrrigationWaterConsumption >= irrigationTask.value.consumptionThreshold;\n}"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1282,
+          "layoutY": 379
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbChangeOriginatorNode",
+        "name": "To Smart Valve",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "originatorSource": "RELATED",
+          "relationsQuery": {
+            "fetchLastLevelOnly": false,
+            "direction": "FROM",
+            "maxLevel": 1,
+            "filters": [
+              {
+                "relationType": "FieldToSmartValve",
+                "entityTypes": [
+                  "DEVICE"
+                ]
+              }
+            ]
+          },
+          "preserveOriginatorIfCustomer": true
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1536,
+          "layoutY": 453
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "To Turn Off RPC call",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "var msg = { RO1_status: \"off\", params: {} };\nvar metadata = { \n    expirationTime: Date.now() + 300000,\n    oneway: true,\n    persistent: true\n};\nreturn { msg: msg, metadata: metadata, msgType: msgType };",
+          "tbelScript": "var msg = { method: \"0A 06 00\", params: {} };\nvar metadata = { \n    expirationTime: Date.now() + 300000,\n    oneway: true,\n    persistent: true\n};\n\nreturn { msg: msg, metadata: metadata, msgType: msgType };"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1540,
+          "layoutY": 553
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "To stopped state",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "var irrigationTaskJson = JSON.parse(metadata.irrigationTask);\nvar irrigationTask = irrigationTaskJson.value;\nirrigationTask.consumption = msg.currentIrrigationWaterConsumption;\nirrigationTask.duration = Date.now() - irrigationTask.startTs;\n\nvar newMsg = {\n    irrigationTask: irrigationTask,\n    irrigationState: \"DONE\"\n};\n\nreturn {msg: newMsg, metadata: {ts:  irrigationTaskJson.ts}, msgType: \"POST_TELEMETRY_REQUEST\"};",
+          "tbelScript": "var irrigationTaskJson = JSON.parse(metadata.irrigationTask);\nvar irrigationTask = irrigationTaskJson.value;\nirrigationTask.consumption = msg.currentIrrigationWaterConsumption;\nirrigationTask.duration = Date.now() - irrigationTask.startTs;\n\nvar newMsg = {\n    irrigationTask: irrigationTask,\n    irrigationState: \"DONE\"\n};\n\nreturn {msg: newMsg, metadata: {ts:  irrigationTaskJson.ts}, msgType: \"POST_TELEMETRY_REQUEST\"};"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1537,
+          "layoutY": 379
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "Update state",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "var irrigationTaskJson = JSON.parse(metadata.irrigationTask);\nvar irrigationTask = irrigationTaskJson.value;\nirrigationTask.consumption = msg.currentIrrigationWaterConsumption;\nirrigationTask.duration = Date.now() - irrigationTask.startTs;\n\nreturn {msg: {irrigationTask: irrigationTask}, metadata: {ts:  irrigationTaskJson.ts}, msgType: \"POST_TELEMETRY_REQUEST\"};",
+          "tbelScript": "var irrigationTaskJson = JSON.parse(metadata.irrigationTask);\nvar irrigationTask = irrigationTaskJson.value;\nirrigationTask.consumption = msg.currentIrrigationWaterConsumption;\nirrigationTask.duration = Date.now() - irrigationTask.startTs;\n\nreturn {msg: {irrigationTask: irrigationTask}, metadata: {ts:  irrigationTaskJson.ts}, msgType: \"POST_TELEMETRY_REQUEST\"};"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1533,
+          "layoutY": 290
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "defaultTTL": 0,
+          "skipLatestPersistence": false,
+          "useServerTs": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1840,
+          "layoutY": 335
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "Fetch Irrigation State",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "tellFailureIfAbsent": true,
+          "clientAttributeNames": [],
+          "sharedAttributeNames": [],
+          "serverAttributeNames": [],
+          "latestTsKeyNames": [
+            "irrigationState"
+          ],
+          "getLatestValueWithTs": false,
+          "fetchTo": "METADATA"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 510,
+          "layoutY": 245
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Is Irrigation On?",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "return metadata.irrigationState === 'ON';",
+          "tbelScript": "return metadata.irrigationState === 'ON';"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 817,
+          "layoutY": 245
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbDuplicateMsgToRelatedNode",
+        "name": "To Moisture Sensor",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "relationsQuery": {
+            "fetchLastLevelOnly": false,
+            "direction": "FROM",
+            "maxLevel": 1,
+            "filters": [
+              {
+                "relationType": "FieldToMoistureSensor",
+                "entityTypes": [
+                  "DEVICE"
+                ]
+              }
+            ]
+          }
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 642,
+          "layoutY": 638
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgAttributesNode",
+        "name": "Save Thresholds",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 2,
+        "configuration": {
+          "scope": "SERVER_SCOPE",
+          "notifyDevice": false,
+          "updateAttributesOnlyOnValueChange": false,
+          "sendAttributesUpdatedNotification": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 940,
+          "layoutY": 635
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbCheckMessageNode",
+        "name": "Has Thresholds?",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "messageNames": [
+            "maxMoistureThreshold",
+            "minMoistureThreshold"
+          ],
+          "metadataNames": [],
+          "checkAllKeys": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 57,
+          "layoutY": 638
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "To Attributes Update",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "var newMsg = {};\nif(msg.maxMoistureThreshold !== undefined) {\n  newMsg.maxMoistureThreshold = msg.maxMoistureThreshold;\n}\nif(msg.minMoistureThreshold !== undefined) {\n  newMsg.minMoistureThreshold = msg.minMoistureThreshold;\n}\nreturn {\n    msg: newMsg, \n    metadata: metadata, \n    msgType: \"POST_ATTRIBUTES_REQUEST\"\n};",
+          "tbelScript": "var newMsg = {};\nif(msg.maxMoistureThreshold != null) {\n  newMsg.maxMoistureThreshold = msg.maxMoistureThreshold;\n}\nif(msg.minMoistureThreshold != null) {\n  newMsg.minMoistureThreshold = msg.minMoistureThreshold;\n}\nreturn {\n    msg: newMsg, \n    metadata: metadata, \n    msgType: \"POST_ATTRIBUTES_REQUEST\"\n};"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 338,
+          "layoutY": 637
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.flow.TbAckNode",
+        "name": "Ignore",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "version": 0
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 816,
+          "layoutY": 164
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.debug.TbMsgGeneratorNode",
+        "name": "Field 1 Water Consumption Simulator",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 2,
+        "configuration": {
+          "msgCount": 0,
+          "periodInSeconds": 60,
+          "scriptLang": "TBEL",
+          "jsScript": "var msg = {waterConsumption: 60};\nvar metadata = {};\nvar msgType = \"POST_TELEMETRY_REQUEST\";\nreturn { msg: msg, metadata: metadata, msgType: msgType };",
+          "tbelScript": "var msg = {waterConsumption: 60};\nvar metadata = {};\nvar msgType = \"POST_TELEMETRY_REQUEST\";\nreturn { msg: msg, metadata: metadata, msgType: msgType };",
+          "originatorId": "09de72a0-b045-11ef-9a99-19e40fc9a6b0",
+          "originatorType": "ASSET"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 247,
+          "layoutY": 51
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.debug.TbMsgGeneratorNode",
+        "name": "Field 2 Water Consumption Simulator",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 2,
+        "configuration": {
+          "msgCount": 0,
+          "periodInSeconds": 60,
+          "scriptLang": "TBEL",
+          "jsScript": "var msg = { waterConsumption: 60 };\nvar metadata = {};\nvar msgType = \"POST_TELEMETRY_REQUEST\";\nreturn { msg: msg, metadata: metadata, msgType: msgType };",
+          "tbelScript": "var msg = { waterConsumption: 60 };\nvar metadata = {};\nvar msgType = \"POST_TELEMETRY_REQUEST\";\nreturn { msg: msg, metadata: metadata, msgType: msgType };",
+          "originatorId": "09e50250-b045-11ef-9a99-19e40fc9a6b0",
+          "originatorType": "ASSET"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 249,
+          "layoutY": 120
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "Fetch Irrigation State",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "tellFailureIfAbsent": true,
+          "clientAttributeNames": [],
+          "sharedAttributeNames": [],
+          "serverAttributeNames": [],
+          "latestTsKeyNames": [
+            "irrigationState"
+          ],
+          "getLatestValueWithTs": false,
+          "fetchTo": "METADATA"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 547,
+          "layoutY": 74
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Is Irrigation On?",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "return metadata.irrigationState === 'ON';",
+          "tbelScript": "return metadata.irrigationState === 'ON';"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 815,
+          "layoutY": 73
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save telemetry",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "defaultTTL": 0,
+          "skipLatestPersistence": false,
+          "useServerTs": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1101,
+          "layoutY": 71
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.integration.TbIntegrationDownlinkNode",
+        "name": "downlink",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "integrationId": "d69c3a80-b080-11ef-9a99-19e40fc9a6b0"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1229,
+          "layoutY": 691
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.integration.TbIntegrationDownlinkNode",
+        "name": "downlink",
+        "debugMode": false,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "integrationId": "d69c3a80-b080-11ef-9a99-19e40fc9a6b0"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1543,
+          "layoutY": 688
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 0,
+        "toIndex": 1,
+        "type": "Post telemetry"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 4,
+        "type": "Other"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 20,
+        "type": "Attributes Updated"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 3,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 5,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 3,
+        "toIndex": 16,
+        "type": "True"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 2,
+        "type": "True"
+      },
+      {
+        "fromIndex": 5,
+        "toIndex": 6,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 7,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 7,
+        "toIndex": 28,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 8,
+        "toIndex": 9,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 9,
+        "toIndex": 10,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 10,
+        "toIndex": 11,
+        "type": "True"
+      },
+      {
+        "fromIndex": 10,
+        "toIndex": 13,
+        "type": "True"
+      },
+      {
+        "fromIndex": 10,
+        "toIndex": 14,
+        "type": "False"
+      },
+      {
+        "fromIndex": 11,
+        "toIndex": 12,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 12,
+        "toIndex": 29,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 13,
+        "toIndex": 15,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 14,
+        "toIndex": 15,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 16,
+        "toIndex": 17,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 16,
+        "toIndex": 22,
+        "type": "Failure"
+      },
+      {
+        "fromIndex": 17,
+        "toIndex": 8,
+        "type": "True"
+      },
+      {
+        "fromIndex": 18,
+        "toIndex": 19,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 20,
+        "toIndex": 21,
+        "type": "True"
+      },
+      {
+        "fromIndex": 21,
+        "toIndex": 18,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 23,
+        "toIndex": 25,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 24,
+        "toIndex": 25,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 25,
+        "toIndex": 22,
+        "type": "Failure"
+      },
+      {
+        "fromIndex": 25,
+        "toIndex": 26,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 26,
+        "toIndex": 27,
+        "type": "True"
+      },
+      {
+        "fromIndex": 27,
+        "toIndex": 8,
+        "type": "Success"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}
