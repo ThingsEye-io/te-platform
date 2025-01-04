@@ -1,0 +1,104 @@
+{
+  "name": "water leak",
+  "description": "",
+  "image": null,
+  "type": "DEFAULT",
+  "transportType": "DEFAULT",
+  "provisionType": "DISABLED",
+  "defaultRuleChainId": {
+    "entityType": "RULE_CHAIN",
+    "id": "ded70780-ca60-11ef-ac8e-dffb17617404"
+  },
+  "defaultDashboardId": null,
+  "defaultQueueName": null,
+  "provisionDeviceKey": null,
+  "firmwareId": null,
+  "softwareId": null,
+  "defaultEdgeRuleChainId": null,
+  "default": false,
+  "profileData": {
+    "configuration": {
+      "type": "DEFAULT"
+    },
+    "transportConfiguration": {
+      "type": "DEFAULT"
+    },
+    "provisionConfiguration": {
+      "type": "DISABLED",
+      "provisionDeviceSecret": null
+    },
+    "alarms": [
+      {
+        "id": "928f1497-5e1b-75af-ee6b-4d7ac1915b1d",
+        "alarmType": "water leak",
+        "createRules": {
+          "CRITICAL": {
+            "condition": {
+              "condition": [
+                {
+                  "key": {
+                    "type": "TIME_SERIES",
+                    "key": "water_leak_status"
+                  },
+                  "valueType": "STRING",
+                  "value": null,
+                  "predicate": {
+                    "type": "STRING",
+                    "operation": "EQUAL",
+                    "value": {
+                      "defaultValue": "LEAK",
+                      "userValue": null,
+                      "dynamicValue": null
+                    },
+                    "ignoreCase": false
+                  }
+                }
+              ],
+              "spec": {
+                "type": "SIMPLE"
+              }
+            },
+            "schedule": null,
+            "alarmDetails": "${water_leak_status}",
+            "dashboardId": null
+          }
+        },
+        "clearRule": {
+          "condition": {
+            "condition": [
+              {
+                "key": {
+                  "type": "TIME_SERIES",
+                  "key": "water_leak_status"
+                },
+                "valueType": "STRING",
+                "value": null,
+                "predicate": {
+                  "type": "STRING",
+                  "operation": "EQUAL",
+                  "value": {
+                    "defaultValue": "NO LEAK",
+                    "userValue": null,
+                    "dynamicValue": null
+                  },
+                  "ignoreCase": false
+                }
+              }
+            ],
+            "spec": {
+              "type": "SIMPLE"
+            }
+          },
+          "schedule": null,
+          "alarmDetails": null,
+          "dashboardId": null
+        },
+        "propagate": false,
+        "propagateToOwner": false,
+        "propagateToOwnerHierarchy": false,
+        "propagateToTenant": false,
+        "propagateRelationTypes": null
+      }
+    ]
+  }
+}
