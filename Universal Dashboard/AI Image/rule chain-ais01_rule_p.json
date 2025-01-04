@@ -1,0 +1,328 @@
+{
+  "ruleChain": {
+    "name": "ais01-rule_p",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": true,
+    "configuration": null,
+    "additionalInfo": {
+      "description": "把数据包整合然后生成图片"
+    }
+  },
+  "metadata": {
+    "version": 2,
+    "firstNodeIndex": 0,
+    "nodes": [
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbMsgTypeSwitchNode",
+        "name": "siq01",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "version": 0
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 366,
+          "layoutY": 156
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "siq01",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "tellFailureIfAbsent": true,
+          "fetchTo": "METADATA",
+          "clientAttributeNames": [],
+          "sharedAttributeNames": [],
+          "serverAttributeNames": [
+            "total_packages",
+            "subcontracting_count",
+            "count_imgdata"
+          ],
+          "latestTsKeyNames": [],
+          "getLatestValueWithTs": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 823,
+          "layoutY": 151
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "siq01",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "msg.count_imgdata = metadata.ss_count_imgdata + \"\" + msg\n    .imgdata\nvar str = msg.count_imgdata\nvar flg = \"Reading\" in msg\nif (str.indexOf(\"undefined\") !== -1) {\n    msg.count_imgdata = str.replace(/undefined/g, \"\")\n}\n\nif (msg.count_imgdata !== \"\" && flg===false) {\n    var newType = \"POST_ATTRIBUTES_REQUEST\"\n    return {\n        msg: msg,\n        metadata: metadata,\n        msgType: newType\n    };\n}\n// if (flg === true) {\n//     delete msg.count_imgdata\n//     var newType1 = 'POST_TELEMETRY_REQUEST'\n//     return {\n//         msg: msg,\n//         metadata: metadata,\n//         msgType: newType1\n//     };\n// }",
+          "tbelScript": "metadata.data = msg.data+\"\"+metadata.data\nreturn {msg: msg, metadata: metadata, msgType: msgType};"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 607,
+          "layoutY": 307
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "siq01",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "if (msg.imgdata === \"\"){\n    metadata.count_imgdata=metadata.ss_count_imgdata\n}\nelse{\nmetadata.count_imgdata = msg.imgdata;\n}\nreturn {msg: msg, metadata: metadata, msgType: msgType};",
+          "tbelScript": "return {msg: msg, metadata: metadata, msgType: msgType};"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1132,
+          "layoutY": 156
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgAttributesNode",
+        "name": "siq01",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 2,
+        "configuration": {
+          "scope": "SERVER_SCOPE",
+          "notifyDevice": false,
+          "sendAttributesUpdatedNotification": false,
+          "updateAttributesOnlyOnValueChange": true
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 417,
+          "layoutY": 427
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "siq01",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "tellFailureIfAbsent": true,
+          "fetchTo": "METADATA",
+          "clientAttributeNames": [],
+          "sharedAttributeNames": [],
+          "serverAttributeNames": [
+            "total_packages",
+            "subcontracting_count",
+            "count_imgdata"
+          ],
+          "latestTsKeyNames": [],
+          "getLatestValueWithTs": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 759,
+          "layoutY": 429
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "siq01",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "var count = metadata.ss_subcontracting_count;\nvar total = metadata.ss_total_packages;\nmsg.count_imgdata = metadata.ss_count_imgdata;\ndelete msg.value\ndelete msg.imgdata\nif (count===total){\n    if (msg.count_imgdata===\"\"){\n        delete msg.count_imgdata\n    }\n    var newType= \"POST_TELEMETRY_REQUEST\"\nreturn {msg: msg, metadata: metadata, msgType: newType};\n}",
+          "tbelScript": "return {msg: msg, metadata: metadata, msgType: msgType};"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1136,
+          "layoutY": 442
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "siq01",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "defaultTTL": 0,
+          "skipLatestPersistence": false,
+          "useServerTs": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 764,
+          "layoutY": 549
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgDeleteAttributesNode",
+        "name": "siq01",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scope": "SERVER_SCOPE",
+          "keys": [
+            "count_imgdata"
+          ],
+          "sendAttributesDeletedNotification": false,
+          "notifyDevice": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1129,
+          "layoutY": 546
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.integration.TbIntegrationDownlinkNode",
+        "name": "downlink",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "integrationId": "ea9df390-9d96-11ef-9a99-19e40fc9a6b0"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 116,
+          "layoutY": 543
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "get",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "tellFailureIfAbsent": false,
+          "fetchTo": "METADATA",
+          "clientAttributeNames": [],
+          "latestTsKeyNames": [],
+          "serverAttributeNames": [
+            "devid",
+            "value"
+          ],
+          "sharedAttributeNames": [
+            "value"
+          ],
+          "getLatestValueWithTs": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 121,
+          "layoutY": 414
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "data",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "defaultTTL": 0,
+          "skipLatestPersistence": false,
+          "useServerTs": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1124,
+          "layoutY": 314
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 0,
+        "toIndex": 1,
+        "type": "Post attributes"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 1,
+        "type": "Post telemetry"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 10,
+        "type": "Attributes Updated"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 2,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 3,
+        "type": "Failure"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 4,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 11,
+        "type": "Failure"
+      },
+      {
+        "fromIndex": 3,
+        "toIndex": 2,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 5,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 5,
+        "toIndex": 6,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 7,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 7,
+        "toIndex": 8,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 10,
+        "toIndex": 9,
+        "type": "Success"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}
