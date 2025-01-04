@@ -1,0 +1,131 @@
+{
+  "ruleChain": {
+    "name": "Door Sensor alarm",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null,
+    "additionalInfo": {
+      "description": ""
+    }
+  },
+  "metadata": {
+    "version": 4,
+    "firstNodeIndex": 1,
+    "nodes": [
+      {
+        "type": "org.thingsboard.rule.engine.mail.TbSendEmailNode",
+        "name": "Send Email",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "useSystemSmtpSettings": true,
+          "smtpHost": "localhost",
+          "smtpPort": 25,
+          "username": null,
+          "password": null,
+          "smtpProtocol": "smtp",
+          "timeout": 10000,
+          "enableTls": false,
+          "tlsVersion": "TLSv1.2",
+          "enableProxy": false,
+          "proxyHost": null,
+          "proxyPort": null,
+          "proxyUser": null,
+          "proxyPassword": null
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1059,
+          "layoutY": 590
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsSwitchNode",
+        "name": "Switch Alarm Type",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "var relations = [];\n\nswitch (msg.type) {\n        case 'door alarm':\n        //if (metadata.humiditiEmailEnabled === 'true'){\n            relations.push('door alarm');\n        //}\n        break; \n    default:\n        relations.push('Other');\n}\n\nreturn relations;",
+          "tbelScript": "var relations = [];\n\nif (msg.type == 'low battery alarm') {\n    \n    if (metadata.lowBattEmailEnabled === 'true'){\n        relations.push('Low battery');\n    }\n} else if (msg.type == 'Device Disconnected') {\n    \n    if (metadata.inactivityEmailEnabled === 'true'){\n        relations.push('device inactive');\n    }\n        \n} else if (msg.type == 'x_axis_alarm') {\n    \n    if (metadata.x_axisEmailEnabled === 'true'){\n        relations.push('x alarm');\n    }\n    \n} else if (msg.type == 'y_axis_alarm') {\n    \n    if (metadata.y_axisEmailEnabled === 'true'){\n        relations.push('y alarm');\n    }\n    \n} else if (msg.type == 'delta_x alarm') {\n    \n    if (metadata.delta_xEmailEnabled === 'true'){\n        relations.push('deltax alarm');\n    }\n    \n} else if (msg.type == 'delta_y alarm') {\n    \n    if (metadata.delta_yEmailEnabled === 'true'){\n        relations.push('deltay alarm');\n    }\n    \n} else {\n    relations.push('Other');\n}\n\nreturn relations;"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 52,
+          "layoutY": 600
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.mail.TbMsgToEmailNode",
+        "name": "Send Email",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "fromTemplate": "admin@thingseye.io",
+          "toTemplate": "${ss_To}",
+          "ccTemplate": "${ss_Cc}",
+          "bccTemplate": "",
+          "subjectTemplate": "Door  ${deviceName} is Open !",
+          "mailBodyType": "false",
+          "bodyTemplate": "door_open_status is open."
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 617,
+          "layoutY": 659
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "get email",
+        "debugMode": true,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "tellFailureIfAbsent": true,
+          "fetchTo": "METADATA",
+          "clientAttributeNames": [],
+          "sharedAttributeNames": [],
+          "serverAttributeNames": [
+            "To",
+            "Cc"
+          ],
+          "latestTsKeyNames": [],
+          "getLatestValueWithTs": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 335,
+          "layoutY": 653
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 1,
+        "toIndex": 3,
+        "type": "door alarm"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 0,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 3,
+        "toIndex": 2,
+        "type": "Success"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}
