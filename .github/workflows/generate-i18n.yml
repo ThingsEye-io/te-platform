@@ -1,0 +1,29 @@
+name: Generate i18n Files
+
+on:
+  push:
+    paths:
+      - 'src/**'    # 当 src 目录下的文件变动时触发
+      - 'templates/**' 
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 运行生成脚本
+        run: |
+          python generate-i18n.py
+
+      - name: 提交生成的文件
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "自动生成多语言文件"
+          file_pattern: "i18n/*.json"  # 只提交 i18n 目录下的文件
