@@ -9,7 +9,6 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
-     permissions:write  # 赋予写入权限
     steps:
       - uses: actions/checkout@v4
         with:
