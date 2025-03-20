@@ -9,7 +9,12 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
+     permissions:write  # 赋予写入权限
     steps:
+      - uses: actions/checkout@v4
+        with:
+          # 明确指定使用具有权限的 token ▼
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: 拉取代码
         uses: actions/checkout@v4
 
