@@ -1,5 +1,4 @@
 {
-  "access" : {
     "unauthorized" : "Unauthorized",
     "unauthorized-access" : "Unauthorized Access",
     "unauthorized-access-text" : "You should sign in to have access to this resource!",
@@ -9,12 +8,8 @@
     "refresh-token-failed" : "Unable to refresh session",
     "permission-denied" : "Permission Denied",
     "permission-denied-text" : "You don't have permission to perform this operation!"
-  },
-  "account" : {
     "account" : "Account",
     "notification-settings" : "Notification settings"
-  },
-  "action" : {
     "activate" : "Activate",
     "suspend" : "Suspend",
     "save" : "Save",
@@ -83,8 +78,6 @@
     "upload" : "Upload",
     "delete-anyway" : "Delete anyway",
     "delete-selected" : "Delete selected"
-  },
-  "aggregation" : {
     "aggregation" : "Aggregation",
     "function" : "Data aggregation function",
     "limit" : "Max values",
@@ -95,8 +88,6 @@
     "sum" : "Sum",
     "count" : "Count",
     "none" : "None"
-  },
-  "admin" : {
     "settings" : "Settings",
     "general" : "General",
     "general-settings" : "General settings",
@@ -126,7 +117,6 @@
       "port" : "Port",
       "port-pattern" : "Port must be a positive integer.",
       "port-range" : "Port should be in a range from 1 to 65535."
-    },
     "mail-from" : "Mail From",
     "mail-from-required" : "Mail From is required.",
     "smtp-protocol" : "SMTP protocol",
@@ -168,7 +158,6 @@
       "api-usage-state-warning" : "Api usage state warning",
       "api-usage-state-disabled" : "Api usage state disabled",
       "two-fa-verification" : "2FA verification message"
-    },
     "mail-subject" : "Mail subject",
     "mail-body" : "Mail body",
     "sms-provider" : "SMS provider",
@@ -386,8 +375,6 @@
       "access-token-status" : "Access token status:",
       "token-status-generated" : "generated",
       "token-status-not-generated" : "not generated"
-    },
-    "smpp-provider" : {
       "smpp-version" : "SMPP version",
       "smpp-host" : "SMPP host",
       "smpp-host-required" : "SMPP host is required",
@@ -444,7 +431,6 @@
       "scheme-music-codes" : "10 - Music Codes (ISO-2022-JP)",
       "scheme-extended-kanji-jis" : "13 - Extended Kanji JIS (X 0212-1990)",
       "scheme-korean-graphic-character-set" : "14 - Korean Graphic Character Set (KS C 5601/KS X 1001)"
-    },
     "queue-select-name" : "Select queue name",
     "queue-name" : "Name",
     "queue-name-required" : "Queue name is required!",
@@ -482,7 +468,6 @@
     "no-auto-commit-entities-prompt" : "No entities configured for auto-commit",
     "delete-auto-commit-settings-title" : "Are you sure you want to delete auto-commit settings?",
     "delete-auto-commit-settings-text" : "Be careful, after the confirmation the auto-commit settings will be removed and auto-commit will be disabled for all entities.",
-    "mobile-app" : {
       "mobile-app" : "Mobile app",
       "mobile-app-qr-code-widget-settings" : "Mobile app QR code widget settings",
       "applications" : "Applications",
@@ -514,8 +499,6 @@
       "preview" : "Preview",
       "connect-mobile-app" : "Connect mobile app",
       "use-system-settings" : "Use system settings"
-    },
-    "2fa" : {
       "2fa" : "Two-factor authentication",
       "available-providers" : "Available providers",
       "issuer-name" : "Issuer name",
@@ -547,8 +530,6 @@
       "within-time" : "Within time (sec)",
       "within-time-pattern" : "Time must be a positive integer.",
       "within-time-required" : "Time is required."
-    },
-    "jwt" : {
       "security-settings" : "JWT security settings",
       "issuer-name" : "Issuer name",
       "issuer-name-required" : "Issuer name is required.",
@@ -569,7 +550,6 @@
       "generate-key" : "Generate key",
       "info-header" : "All users will be to re-logined",
       "info-message" : "Change of the JWT Signing Key will cause all issued tokens to be invalid. All users will need to re-login. This will also affect scripts that use Rest API/Websockets."
-    },
     "resources" : "Resources",
     "notifications" : "Notifications",
     "notifications-settings" : "Notifications settings",
@@ -580,8 +560,6 @@
     "firebase-service-account-file" : "Firebase service account credentials JSON file",
     "select-firebase-service-account-file" : "Drag and drop your Firebase service account credentials file or ",
     "use-system-mobile-settings" : "Use system mobile settings"
-  },
-  "alarm" : {
     "alarm" : "Alarm",
     "alarms" : "Alarms",
     "all-alarms" : "All alarms",
