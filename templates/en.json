@@ -10,7 +10,7 @@
     "permission-denied" : "Permission Denied",
     "permission-denied-text" : "You don't have permission to perform this operation!"
     "account" : "Account",
-    "notification-settings" : "Notification settings"
+    "notification-settings" : "Notification settings",
     "activate" : "Activate",
     "suspend" : "Suspend",
     "save" : "Save",
