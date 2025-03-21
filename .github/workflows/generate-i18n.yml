@@ -9,9 +9,13 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 必须显式声明
     steps:
       - name: 拉取代码
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # 重要：传递 Token
 
       - name: 设置 Python
         uses: actions/setup-python@v4
@@ -21,12 +25,12 @@ jobs:
       - name: 运行生成脚本
         run: python generate-i18n.py
 
-      - name: 创建 Pull Request
-        uses: peter-evans/create-pull-request@v5
+      - name: 提交生成的文件
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "自动生成多语言文件"
-          branch: "auto-generate-i18n"  # 新分支名
-          title: "自动生成多语言文件"
-          body: "由 GitHub Actions 自动生成的多语言文件。"
-          labels: "automation"
+          commit_message: "自动生成多语言文件"
+          file_pattern: "i18n/*.json"
+          token: ${{ secrets.GITHUB_TOKEN }}  # 或 secrets.PAT_TOKEN
+          branch: main
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
