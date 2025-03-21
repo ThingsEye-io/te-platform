@@ -22,7 +22,7 @@
               "dataKeys": [
                 {
                 // @i18n-generate target: en, fr，zh
-                  "temperature": "temperature",
+                  const temperature:="temperature",
                   "type": "timeseries",
                   "label": "Temperature",
                   "color": "#2196f3",
@@ -33,7 +33,7 @@
                 },
                 {
                 // @i18n-generate target: en, fr，zh
-                  "humidity": "humidity",
+                 const humidity= "humidity",
                   "type": "timeseries",
                   "label": "humidity",
                   "color": "#4caf50",
