@@ -33,7 +33,8 @@
                   "_hash": 0.8642664206929882,
                   "units": "°C",
                   "decimals": 0
-                  }
+                
+              }
                 },
                 {
                 // @i18n-generate target: en, fr，zh
