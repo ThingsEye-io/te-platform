@@ -1,5 +1,7 @@
 {
    "temperature":"temperature",
 "humidity":"humidity",
- "unauthorized" : "Unauthorized"
-      }
+ "unauthorized" : "Unauthorized",
+"greeting": "Hello",
+  "farewell": "Goodbye"
+  }
