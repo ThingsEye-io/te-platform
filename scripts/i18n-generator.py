@@ -9,6 +9,7 @@ class I18NGenerator:
         self.translation_dict = self._load_dictionary()
         
     def _load_dictionary(self):
+        """加载翻译词典"""
         dict_path = Path("translations/dictionary.json")
         if dict_path.exists():
             with open(dict_path, "r", encoding="utf-8") as f:
@@ -25,7 +26,7 @@ class I18NGenerator:
         return True
 
     def _extract_translation_targets(self, file_path):
-        """更安全地提取翻译目标"""
+        """安全提取翻译目标"""
         try:
             content = Path(file_path).read_text(encoding="utf-8")
             pattern = re.compile(
@@ -51,14 +52,18 @@ class I18NGenerator:
             print(f"⚠️ 处理文件 {file_path} 时出错: {str(e)}")
 
     def generate(self):
+        """生成多语言文件"""
         translations = {}
         
+        # 收集所有翻译文本
         for file in Path("src").glob("**/*.js"):
             for langs, text in self._extract_translation_targets(file):
                 for lang in langs:
-                    translations.setdefault(lang, {}).update(
-                        {text: self.translation_dict.get(lang, {}).get(text, text)}
+                    if lang not in translations:
+                        translations[lang] = {}
+                    translations[lang][text] = self.translation_dict.get(lang, {}).get(text, text)
         
+        # 生成输出文件
         output_dir = Path("generated/i18n")
         output_dir.mkdir(parents=True, exist_ok=True)
         
