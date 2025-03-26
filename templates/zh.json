@@ -1,6 +1,3 @@
 {
-   "temperature":"温度",
-"humidity":"湿度",
- "unauthorized" : "未授权",
  "greeting": "你好"
       }
