@@ -1,3 +1,6 @@
 {
+  "temperature": "temp\u00e9rature",
+  "humidity": "l'humidit\u00e9",
+  "unauthorized": "non autoris\u00e9",
   "greeting": "Bonjour"
 }

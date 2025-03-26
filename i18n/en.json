@@ -1,7 +1,3 @@
 {
-  "temperature": "temperature",
-  "humidity": "humidity",
-  "unauthorized": "Unauthorized",
-  "greeting": "Hello",
-  "farewell": "Goodbye"
+  "greeting": "Hello"
 }
