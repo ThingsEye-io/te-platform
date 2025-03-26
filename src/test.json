@@ -22,7 +22,10 @@
               "dataKeys": [
                 {
                 // @i18n-generate target: en, fr，zh
-                  const temperature:="temperature",
+                  const mssage：{
+                     // @i18n-text temperature
+                    temperature:="temperature",
+                   // @i18n-text timeseries
                   "type": "timeseries",
                   "label": "Temperature",
                   "color": "#2196f3",
@@ -30,6 +33,7 @@
                   "_hash": 0.8642664206929882,
                   "units": "°C",
                   "decimals": 0
+                  }
                 },
                 {
                 // @i18n-generate target: en, fr，zh
