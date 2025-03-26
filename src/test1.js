@@ -1,4 +1,4 @@
-// @i18n-directive target: en,fr,ja,is
+// @i18n-directive target: en,fr,ja,is,zh-ch
 const messages = {
   // @i18n-text 你好
   greeting: "你好",
