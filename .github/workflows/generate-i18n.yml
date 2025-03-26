@@ -1,35 +1,43 @@
-name: Generate i18n Files
+name: I18N Generator
 
 on:
   push:
     paths:
-      - 'src/**'
-      - 'templates/**'
+      - "src/**"
+      - "translations/**"
+    branches: [ main ]
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      
     steps:
-      - name: 拉取代码
+      - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 获取完整历史
+          fetch-depth: 0
 
-      - name: 设置 Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
-      - name: 运行生成脚本
-        run: python generate-i18n.py
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install deep-translator
 
-      - name: 提交生成的文件
+      - name: Run generator
+        run: python scripts/i18n-generator.py
+        env:
+          GOOGLE_TRANSLATE_API_KEY: ${{ secrets.TRANSLATE_API_KEY }}
+
+      - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "自动生成多语言文件"
-          file_pattern: "i18n/*.json"
-          branch: main
-          commit_user_name: "github-actions[bot]"
-          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
+          commit_message: "🌍 Auto-generated i18n files"
+          file_pattern: "generated/i18n/*.json"
+          commit_user_name: "i18n-bot"
+          commit_user_email: "i18n-bot@users.noreply.github.com"
