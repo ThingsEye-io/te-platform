@@ -1,10 +1,12 @@
 {
   "en": {
     "你好": "Hello",
-    "欢迎": "Welcome"
+    "欢迎": "Welcome",
+    "温度":"temperature"
   },
   "fr": {
     "你好": "Bonjour",
-    "欢迎": "Bienvenue"
+    "欢迎": "Bienvenue",
+     "温度":"temp"
   }
 }
