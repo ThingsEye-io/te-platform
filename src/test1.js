@@ -26,7 +26,7 @@
                   "temperature": "temperature",
                   // @i18n-text type
                   "type": "timeseri",
-        
+        // @i18n-text label
                   "label": "Temperature",
                   "color": "#2196f3",
                   "settings": {},
