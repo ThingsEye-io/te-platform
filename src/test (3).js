@@ -23,7 +23,7 @@
 // @i18n-directive target:en,fr,is,zh,ja
                 {
                // @i18n-text temperature
-                  "name": "temperature",
+                  "temperature": "temperature",
                   "type": "timeseries",
                   "label": "Temperature",
                   "color": "#2196f3",
