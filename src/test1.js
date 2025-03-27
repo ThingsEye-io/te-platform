@@ -22,9 +22,11 @@
               "dataKeys": [
 // @i18n-directive target:en,fr,is,zh,ja
                 {
-               // @i18n-text temperature,type,label
+               // @i18n-text temperature
                   "temperature": "temperature",
+                  // @i18n-text type
                   "type": "timeseri",
+                  // @i18n-text label
                   "label": "Temperature",
                   "color": "#2196f3",
                   "settings": {},
