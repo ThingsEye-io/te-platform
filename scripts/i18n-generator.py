@@ -1,81 +1,54 @@
-import os
 import json
 import re
-import sys
 from pathlib import Path
 
-class I18NGenerator:
+class JsonI18NGenerator:
     def __init__(self):
-        self.translation_dict = self._load_dictionary()
+        self.translations = {
+            "en": {},
+            "fr": {},
+            "zh": {},
+            "ja": {},
+            "is": {}
+        }
         
-    def _load_dictionary(self):
-        """加载翻译词典"""
-        dict_path = Path("translations/dictionary.json")
-        if dict_path.exists():
-            with open(dict_path, "r", encoding="utf-8") as f:
-                return json.load(f)
-        return {"en": {}, "fr": {}}
+    def _extract_from_json(self, data, path=""):
+        """递归提取需要翻译的字段"""
+        if isinstance(data, dict):
+            for key, value in data.items():
+                current_path = f"{path}.{key}" if path else key
+                if isinstance(value, str):
+                    # 标记需要翻译的字段（包含特定前缀）
+                    if key.endswith(("label", "title", "name", "description")):
+                        self._add_translation(value, current_path)
+                elif isinstance(value, (dict, list)):
+                    self._extract_from_json(value, current_path)
+        elif isinstance(data, list):
+            for i, item in enumerate(data):
+                self._extract_from_json(item, f"{path}[{i}]")
 
-    def _validate_annotation(self, annotation):
-        """验证标注格式是否正确"""
-        if not annotation.startswith("// @"):
-            return False
-        if "target:" not in annotation:
-            print(f"⚠️ 错误标注: 缺少 'target:' - {annotation}")
-            return False
-        return True
+    def _add_translation(self, text, path):
+        """添加翻译条目"""
+        if text and text.strip():
+            for lang in self.translations:
+                self.translations[lang].setdefault(path, text)
 
-    def _extract_translation_targets(self, file_path):
-        """安全提取翻译目标"""
-        try:
-            content = Path(file_path).read_text(encoding="utf-8")
-            pattern = re.compile(
-                r'//\s*@i18n-directive\s+(target:[^\n]+)\n.*?'
-                r'//\s*@i18n-text\s+([^\n]+)\n.*?["\']([^"\']+)["\']',
-                re.DOTALL
-            )
-            
-            for match in pattern.finditer(content):
-                target, _, text = match.groups()
-                if not self._validate_annotation(match.group(0)):
-                    continue
-                    
-                try:
-                    langs_part = target.split(":")[1].strip()
-                    langs = [lang.strip() for lang in langs_part.split(",") if lang.strip()]
-                    if langs:
-                        yield langs, text.strip()
-                except IndexError:
-                    print(f"❌ 格式错误: {target}")
-                    
-        except Exception as e:
-            print(f"⚠️ 处理文件 {file_path} 时出错: {str(e)}")
-
-    def generate(self):
+    def generate(self, input_file, output_dir):
         """生成多语言文件"""
-        translations = {}
+        with open(input_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
         
-        # 收集所有翻译文本
-        for file in Path("src").glob("**/*.js"):
-            for langs, text in self._extract_translation_targets(file):
-                for lang in langs:
-                    if lang not in translations:
-                        translations[lang] = {}
-                    translations[lang][text] = self.translation_dict.get(lang, {}).get(text, text)
+        self._extract_from_json(data)
         
-        # 生成输出文件
-        output_dir = Path("generated/i18n")
-        output_dir.mkdir(parents=True, exist_ok=True)
+        output_dir = Path(output_dir)
+        output_dir.mkdir(exist_ok=True)
         
-        for lang, texts in translations.items():
+        for lang, texts in self.translations.items():
             output_file = output_dir / f"{lang}.json"
             with open(output_file, "w", encoding="utf-8") as f:
                 json.dump(texts, f, indent=2, ensure_ascii=False)
-            print(f"✅ 生成: {output_file}")
+            print(f"Generated: {output_file}")
 
 if __name__ == "__main__":
-    try:
-        I18NGenerator().generate()
-    except Exception as e:
-        print(f"❌ 生成失败: {str(e)}")
-        sys.exit(1)
+    generator = JsonI18NGenerator()
+    generator.generate("path/to/your/config.json", "generated/i18n")
