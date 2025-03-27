@@ -1,3 +1,4 @@
   {
- "greeting": "Bonjour"
+ "greeting": "Bonjour",
+   " temperature":"TEMP"
 }
