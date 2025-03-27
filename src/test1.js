@@ -24,7 +24,9 @@
                 {
                // @i18n-text temperature
                   "temperature": "temperature",
+                   // @i18n-text type
                   "type": "timeseries",
+                          // @i18n-text label
                   "label": "Temperature",
                   "color": "#2196f3",
                   "settings": {},
