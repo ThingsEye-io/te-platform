@@ -59,7 +59,7 @@ class JsonI18NGenerator:
 
 if __name__ == "__main__":
     # 使用示例（根据实际情况修改路径）
-    config_path = "config/dashboard.json"  # 改为您实际的配置文件路径
+    config_path = "src/test1.json"  # 改为您实际的配置文件路径
     
     generator = JsonI18NGenerator()
     generator.generate(config_path, "generated/i18n")
