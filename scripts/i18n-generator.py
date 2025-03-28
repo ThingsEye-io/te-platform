@@ -73,6 +73,6 @@ class SelectiveTranslator:
 if __name__ == "__main__":
     translator = SelectiveTranslator()
     translator.process_file(
-        "your_rulechain.json",  # 替换为您的文件路径
+        "src/test1.json",  # 替换为您的文件路径
         "generated/i18n"
     )
