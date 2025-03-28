@@ -1,0 +1,18 @@
+{
+  "ruleChain": {
+    // @i18n-translate
+    "name": "Thingseye-Temp",
+    "type": "CORE"  // 这个字段不会被翻译
+  },
+  "metadata": {
+    "nodes": [
+      {
+        // @i18n-translate
+        "name": "Save Timeseries",
+        "configuration": {
+          "defaultTTL": 0  // 数字不翻译
+        }
+      }
+    ]
+  }
+}
