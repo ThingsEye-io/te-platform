@@ -1,0 +1,10 @@
+{
+  "ruleChain": {
+    "original": "Thingseye-Temp",
+    "translated": "[is] Thingseye-Temp"
+  },
+  "ruleChain.name.type.metadata.nodes": {
+    "original": "Save Timeseries",
+    "translated": "[is] Save Timeseries"
+  }
+}
