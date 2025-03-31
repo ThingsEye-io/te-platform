@@ -1,12 +1,16 @@
 {
-  "en": {
-    "你好": "Hello",
-    "欢迎": "Welcome",
-    "温度":"temperature"
+  "ruleChain.name": {
+    "en": "Thingseye-Temp",
+    "zh": "物眼温度系统",
+    "fr": "Thingseye-Temp",
+    "ja": "シングサイ温度",
+    "is": "Thingseye-Temp"
   },
-  "fr": {
-    "你好": "Bonjour",
-    "欢迎": "Bienvenue",
-     "温度":"temp"
+  "metadata.nodes[0].name": {
+    "en": "Save Timeseries",
+    "zh": "保存时间序列数据",
+    "fr": "Enregistrer les séries temporelles",
+    "ja": "時系列データを保存",
+    "is": "Vista tímaröð"
   }
 }
